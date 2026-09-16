@@ -33,6 +33,7 @@
   },
   "idle": {
     "roomTitle": "{{number}}-sanlı bólmege kiriw ushın",
+    "roomTitleWithName": "{{number}}-sanlı «{{name}}» bólmesine kiriw ushın",
     "roomAccent": "identifikaciyadan ótiń",
     "title": "Kiriw sisteması",
     "accent": "tayın",

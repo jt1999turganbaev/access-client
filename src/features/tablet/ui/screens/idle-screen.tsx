@@ -14,10 +14,14 @@ export function IdleScreen() {
       <IdentityCircle size={28} />
 
       {room?.number ? (
-        // Xona tanlangan bo'lsa, sarlavhada o'sha xona raqami ko'rinadi
+        // Xona tanlangan bo'lsa, sarlavhada o'sha xona raqami va nomi ko'rinadi
         <div className={classes.roomHeading}>
           <StatusHeading
-            title={t('idle.roomTitle', { number: room.number })}
+            title={
+              room.name?.trim()
+                ? t('idle.roomTitleWithName', { number: room.number, name: room.name.trim() })
+                : t('idle.roomTitle', { number: room.number })
+            }
             accent={t('idle.roomAccent')}
             accentColor="blue"
           />

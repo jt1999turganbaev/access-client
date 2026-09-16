@@ -33,6 +33,7 @@
   },
   "idle": {
     "roomTitle": "{{number}} raqamli xonaga kirish uchun",
+    "roomTitleWithName": "{{number}} raqamli «{{name}}» xonasiga kirish uchun",
     "roomAccent": "identifikatsiyadan o‘ting",
     "title": "Kirish tizimi",
     "accent": "tayyor",

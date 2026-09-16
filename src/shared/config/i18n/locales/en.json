@@ -33,6 +33,7 @@
   },
   "idle": {
     "roomTitle": "To enter room {{number}},",
+    "roomTitleWithName": "To enter room {{number}} “{{name}}”,",
     "roomAccent": "please identify yourself",
     "title": "Access system",
     "accent": "ready",

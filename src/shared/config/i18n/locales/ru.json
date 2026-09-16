@@ -33,6 +33,7 @@
   },
   "idle": {
     "roomTitle": "Для входа в помещение № {{number}}",
+    "roomTitleWithName": "Для входа в помещение № {{number}} «{{name}}»",
     "roomAccent": "пройдите идентификацию",
     "title": "Система доступа",
     "accent": "готова",
