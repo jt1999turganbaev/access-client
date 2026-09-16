@@ -1,5 +1,8 @@
 node_modules
 dist
+# Env fayllar (manzillar, maxfiy qiymatlar) repozitoriyga tushmaydi
+.env
+.env.*
 dist-ssr
 *.local
 .DS_Store
