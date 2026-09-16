@@ -1,6 +1,5 @@
 import { Navigate } from 'react-router-dom';
-import { StatusAvatar, StatusHeading } from '@/shared/ui';
-import { UserInfoCard } from '../info-card/user-info-card';
+import { StatusAvatar } from '@/shared/ui';
 import { TaskCard } from '../info-card/task-card';
 import { useTablet } from '@/features/tablet/tablet-context/tablet-context';
 import { ROUTES } from '@/shared/constants/routes';
@@ -19,15 +18,11 @@ export function SuccessScreen() {
         <StatusAvatar status="success" photoUrl={user.photoUrl} size={11} />
       </div>
 
-      <StatusHeading
-        compact
-        title="Kirishga"
-        accent="ruxsat berildi!"
-        accentColor="green"
-        subtitle={`Xush kelibsiz, ${user.fullName}!`}
-      />
+      <div className={classes.welcome}>
+        <div className={classes.welcomeText}>Xush kelibsiz,</div>
+        <h1 className={classes.welcomeName}>{user.fullName}!</h1>
+      </div>
 
-      <UserInfoCard user={user} />
       <TaskCard tasks={user.tasks} />
       <ResultCountdown />
     </div>

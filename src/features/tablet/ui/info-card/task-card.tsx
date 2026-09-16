@@ -6,14 +6,9 @@ import classes from './info-card.module.css';
 const LONG_TEXT = 140;
 
 export function TaskCard({ tasks }: { tasks?: TaskItem[] | null }) {
-  // Ro'yxat kelmasligi yoki bo'sh elementlar bo'lishi mumkin
-  const items = (Array.isArray(tasks) ? tasks : []).filter(
-    (task) => task && (task.title || task.description),
-  );
-  const totalLength = items.reduce(
-    (sum, task) => sum + (task.title?.length ?? 0) + (task.description?.length ?? 0),
-    0,
-  );
+  // Ro'yxat kelmasligi yoki bo'sh elementlar bo'lishi mumkin; nomi ko'rsatilmaydi — faqat matni
+  const items = (Array.isArray(tasks) ? tasks : []).filter((task) => task?.description);
+  const totalLength = items.reduce((sum, task) => sum + (task.description?.length ?? 0), 0);
   const compact = totalLength > LONG_TEXT;
 
   return (
@@ -23,7 +18,9 @@ export function TaskCard({ tasks }: { tasks?: TaskItem[] | null }) {
           <div className={`${classes.chip} ${classes.chipGreen}`}>
             <IconClipboardList className={classes.chipIcon} stroke={2} />
           </div>
-          <div className={classes.title}>Vazifa (Task)</div>
+          <div className={classes.title}>
+            {items.length > 1 ? 'Sizning vazifalaringiz' : 'Sizning vazifangiz'}
+          </div>
         </div>
         {items.length > 0 && <div className={classes.badge}>{items.length} ta</div>}
       </div>
@@ -37,7 +34,6 @@ export function TaskCard({ tasks }: { tasks?: TaskItem[] | null }) {
             <div className={classes.task} key={task.id ?? index}>
               {items.length > 1 && <div className={classes.taskIndex}>{index + 1}</div>}
               <div className={`${classes.taskText} ${compact ? classes.taskTextCompact : ''}`}>
-                {task.title && <div className={classes.taskTitle}>{task.title}</div>}
                 {task.description}
               </div>
             </div>

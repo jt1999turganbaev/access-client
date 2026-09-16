@@ -8,11 +8,11 @@
   animation: rise 420ms ease both;
 }
 
-/* Task kartasi qolgan bo'sh joyni to'liq egallaydi (pastgacha), matn sig'masa
-   faqat ro'yxatning ichida scroll bo'ladi — karta hech qachon qisilib qolmaydi */
+/* Task kartasi balandligi matnga qarab o'zgaradi — kam bo'lsa pastgacha cho'zilmaydi.
+   Matn sig'masa karta bo'sh joy bilan cheklanadi va faqat ro'yxat ichida scroll bo'ladi */
 .cardGrow {
-  flex: 1 1 auto;
-  min-height: 12rem;
+  flex: 0 1 auto;
+  min-height: 0;
   display: flex;
   flex-direction: column;
 }
@@ -170,14 +170,6 @@
   font-size: var(--fs-sm);
   line-height: 1.55;
   max-width: 42rem;
-}
-
-.taskTitle {
-  font-size: var(--fs-md);
-  font-weight: var(--fw-title);
-  color: #1c4a31;
-  margin-bottom: 0.6rem;
-  line-height: 1.25;
 }
 
 .empty {

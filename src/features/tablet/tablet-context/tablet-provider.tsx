@@ -68,12 +68,15 @@ export function TabletProvider({ children }: { children: ReactNode }) {
   const showResult = useCallback(
     (next: AccessEvent, timeout?: number) => {
       clearTimers();
-      const duration = timeout ?? resultTimeout(next);
+      // Ruxsat berilganda (success) ekran avtomatik bosh sahifaga qaytmaydi —
+      // keyingi hodisa kelguncha yoki reset() chaqirilguncha turadi
+      const autoReset = next.status !== 'granted';
+      const duration = autoReset ? (timeout ?? resultTimeout(next)) : 0;
       setEvent(next);
       setResultDuration(duration);
       setState(stateByStatus[next.status]);
       navigate(routeByStatus[next.status], { replace: true });
-      resultTimer.current = window.setTimeout(reset, duration);
+      if (autoReset) resultTimer.current = window.setTimeout(reset, duration);
     },
     [clearTimers, navigate, reset],
   );

@@ -11,12 +11,22 @@ export function IdleScreen() {
     <div className={classes.center}>
       <IdentityCircle size={28} />
 
-      <StatusHeading
-        title="Kirish tizimi"
-        accent="tayyor"
-        accentColor="blue"
-        subtitle="Terminal orqali yuzingizni taniting"
-      />
+      {room?.number ? (
+        // Xona tanlangan bo'lsa, sarlavhada o'sha xona raqami ko'rinadi
+        <div className={classes.roomHeading}>
+          <StatusHeading
+            title={`${room.number} raqamli xonaga kirish uchun`}
+            accent="identifikatsiyadan o'ting"
+            accentColor="blue"
+          />
+        </div>
+      ) : (
+        <StatusHeading
+          title="Kirish tizimi"
+          accent="tayyor"
+          accentColor="blue"
+        />
+      )}
 
       <div className={`${classes.pill} ${connected ? '' : classes.pillOffline}`}>
         <span className={classes.dot} />

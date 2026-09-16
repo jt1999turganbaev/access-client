@@ -10,6 +10,11 @@
   padding-bottom: 2rem;
 }
 
+/* DEFAULT: xona tanlangan bo'lsa sarlavha uzun — kichikroq shrift */
+.roomHeading h1 {
+  font-size: 2.6rem;
+}
+
 /* SUCCESS / DENIED / NOT FOUND: yuqoridan pastga */
 .result {
   flex: 1;
@@ -19,6 +24,44 @@
   align-items: stretch;
   gap: 1.5rem;
   padding-top: 1rem;
+}
+
+/* SUCCESS: "Xush kelibsiz" va FIO alohida qatorlarda, FIO kattaroq */
+.welcome {
+  flex: none;
+  text-align: center;
+  /* Uzun FIO ekran chetlariga taqalib qolmasin */
+  padding: 0 3rem;
+  overflow-wrap: anywhere;
+  /* Vazifa kartasi FIOdan biroz pastroq tursin */
+  margin-bottom: 2rem;
+  animation: fade 420ms ease both;
+}
+
+.welcomeText {
+  font-size: 2.85rem;
+  font-weight: 600;
+  color: #6b83b0;
+}
+
+.welcomeName {
+  margin: 0.4rem 0 0;
+  font-size: 4rem;
+  font-weight: var(--fw-display);
+  line-height: 1.15;
+  color: var(--ac-navy);
+  letter-spacing: -0.03rem;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+    transform: translateY(0.8rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .avatarRow {
