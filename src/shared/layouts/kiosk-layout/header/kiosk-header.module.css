@@ -25,14 +25,13 @@
 }
 
 .system {
-  font-size: var(--fs-base);
+  font-size: 1.3rem;
   font-weight: var(--fw-value);
   line-height: 1.35;
   letter-spacing: 0.01em;
   color: #4a6094;
-  /* Nom har tilda boshqa uzunlikda — qatorlarga o'zi bo'linadi */
-  text-transform: uppercase;
-  max-width: 30rem;
+  /* Nom har tilda boshqa uzunlikda — qatorlarga o'zi bo'linadi, harflar tarjimadagidek */
+  max-width: 32rem;
 }
 
 .clock {

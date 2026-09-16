@@ -2,6 +2,8 @@ node_modules
 dist
 # vite-plugin-pwa dev rejimida yaratadi — prodga kerak emas
 dev-dist
+# TypeScript kesh fayllari — `tsc -b` o'zi qayta yaratadi
+*.tsbuildinfo
 # Env fayllar (manzillar, maxfiy qiymatlar) repozitoriyga tushmaydi
 .env
 .env.*
