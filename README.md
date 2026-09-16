@@ -68,7 +68,7 @@ npx vite preview --port 4173     # http://localhost:4173
 
 ## Backend (`/api/tablet`)
 
-Hujjat: http://10.95.3.13:8000/docs/tablet
+Hujjat: http://192.168.1.250:8000/docs/tablet
 
 | Method | URL                                   | Ishlatilishi                                    |
 | ------ | ------------------------------------- | ----------------------------------------------- |
