@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { IconClipboardList } from '@tabler/icons-react';
 import type { TaskItem } from '@/features/tablet/types';
 import classes from './info-card.module.css';
@@ -6,6 +7,7 @@ import classes from './info-card.module.css';
 const LONG_TEXT = 140;
 
 export function TaskCard({ tasks }: { tasks?: TaskItem[] | null }) {
+  const { t } = useTranslation();
   // Ro'yxat kelmasligi yoki bo'sh elementlar bo'lishi mumkin; nomi ko'rsatilmaydi — faqat matni
   const items = (Array.isArray(tasks) ? tasks : []).filter((task) => task?.description);
   const totalLength = items.reduce((sum, task) => sum + (task.description?.length ?? 0), 0);
@@ -19,15 +21,17 @@ export function TaskCard({ tasks }: { tasks?: TaskItem[] | null }) {
             <IconClipboardList className={classes.chipIcon} stroke={2} />
           </div>
           <div className={classes.title}>
-            {items.length > 1 ? 'Sizning vazifalaringiz' : 'Sizning vazifangiz'}
+            {items.length > 1 ? t('task.titleMany') : t('task.titleOne')}
           </div>
         </div>
-        {items.length > 0 && <div className={classes.badge}>{items.length} ta</div>}
+        {items.length > 0 && (
+          <div className={classes.badge}>{t('task.count', { count: items.length })}</div>
+        )}
       </div>
       <div className={classes.divider} />
 
       {items.length === 0 ? (
-        <div className={classes.empty}>Bugungi kun uchun vazifa biriktirilmagan.</div>
+        <div className={classes.empty}>{t('task.empty')}</div>
       ) : (
         <div className={classes.tasks}>
           {items.map((task, index) => (

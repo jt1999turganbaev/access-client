@@ -6,6 +6,7 @@ import {
   env,
 } from '@/shared/config/env';
 import type { AccessDisplay, AccessEvent, Room } from '@/features/tablet/types';
+import { i18n } from '@/shared/config/i18n';
 
 /**
  * Natija ekrani qancha turadi.
@@ -31,7 +32,7 @@ export const roomLabel = (room: Room) =>
     : (room.number ?? room.name ?? '—');
 
 const directionLabel = (direction: AccessDisplay['direction']) =>
-  direction === 'in' ? 'Kirish' : direction === 'out' ? 'Chiqish' : '—';
+  direction === 'in' || direction === 'out' ? i18n.t(`direction.${direction}`) : '—';
 
 export function resolvePhoto(photo: string | null | undefined) {
   if (!photo || typeof photo !== 'string') return null;

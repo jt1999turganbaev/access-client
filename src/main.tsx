@@ -16,6 +16,8 @@ import '@fontsource/montserrat/900.css';
 
 import './global.css';
 
+import '@/shared/config/i18n';
+
 // PWA: yangi versiya chiqsa, planshet o'zi yangilaydi
 registerSW({ immediate: true });
 

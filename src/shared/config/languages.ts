@@ -1,0 +1,14 @@
+/** Planshet shu tilda ochiladi — tanlangan til saqlanmagan bo'lsa */
+export const DEFAULT_LANGUAGE = 'qq';
+
+/** Qo'llab-quvvatlanadigan tillar — access loyihasidagi to'plam, qoraqalpoqcha birinchi */
+export const LANGUAGES = [
+  { code: 'qq', label: 'Qaraqalpaqsha' },
+  { code: 'uz', label: 'O‘zbekcha' },
+  { code: 'ru', label: 'Русский' },
+  { code: 'en', label: 'English' },
+] as const;
+
+export type LanguageCode = (typeof LANGUAGES)[number]['code'];
+
+export const SUPPORTED_LANGUAGES: LanguageCode[] = LANGUAGES.map((item) => item.code);

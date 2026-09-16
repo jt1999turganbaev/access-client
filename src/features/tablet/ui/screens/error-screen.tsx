@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Button } from '@mantine/core';
 import { IconAlertTriangle, IconRefresh } from '@tabler/icons-react';
 import { StatusHeading } from '@/shared/ui';
@@ -18,6 +19,8 @@ interface Props {
  * router'ning `errorElement` i sifatida ham ishlatiladi.
  */
 export function ErrorScreen({ detail, onRetry }: Props) {
+  const { t } = useTranslation();
+
   // Planshet nazoratsiz qolmasligi uchun xato ekrani ham o'zi bosh sahifaga qaytadi.
   // To'liq qayta yuklanadi — ilova buzilgan holatda qolmasligi uchun.
   useEffect(() => {
@@ -35,15 +38,10 @@ export function ErrorScreen({ detail, onRetry }: Props) {
 
       <StatusHeading
         compact
-        title="Xatolik"
-        accent="yuz berdi!"
+        title={t('error.title')}
+        accent={t('error.accent')}
         accentColor="red"
-        subtitle={
-          <span className={classes.notFoundText}>
-            Kutilmagan xato sodir bo‘ldi. Iltimos, qayta urinib ko‘ring yoki tizim
-            administratoriga murojaat qiling.
-          </span>
-        }
+        subtitle={<span className={classes.notFoundText}>{t('error.text')}</span>}
       />
 
       {import.meta.env.DEV && detail && <div className={classes.errorDetail}>{detail}</div>}
@@ -57,7 +55,7 @@ export function ErrorScreen({ detail, onRetry }: Props) {
           leftSection={<IconRefresh className={classes.backIcon} />}
           onClick={onRetry ?? (() => window.location.reload())}
         >
-          Qayta urinish
+          {t('common.retry')}
         </Button>
       </div>
     </div>

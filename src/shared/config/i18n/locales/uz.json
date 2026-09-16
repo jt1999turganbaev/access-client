@@ -1,0 +1,92 @@
+{
+  "header": {
+    "org": "Tibbiyot va farmatsevtika xodimlarining malakasini baholash markazi"
+  },
+  "footer": {
+    "slogan": "Raqamli imkoniyatlar — Yangi O‘zbekiston uchun"
+  },
+  "date": {
+    "format": "{{day}}-{{month}}, {{year}}",
+    "months": [
+      "yanvar",
+      "fevral",
+      "mart",
+      "aprel",
+      "may",
+      "iyun",
+      "iyul",
+      "avgust",
+      "sentabr",
+      "oktabr",
+      "noyabr",
+      "dekabr"
+    ],
+    "weekdays": ["Yakshanba", "Dushanba", "Seshanba", "Chorshanba", "Payshanba", "Juma", "Shanba"]
+  },
+  "common": {
+    "back": "Orqaga qaytish",
+    "retry": "Qayta urinish",
+    "save": "Saqlash",
+    "loading": "Yuklanmoqda...",
+    "settings": "Sozlash",
+    "language": "Til"
+  },
+  "idle": {
+    "roomTitle": "{{number}} raqamli xonaga kirish uchun",
+    "roomAccent": "identifikatsiyadan o‘ting",
+    "title": "Kirish tizimi",
+    "accent": "tayyor",
+    "online": "Yuzni tanish tizimi faol",
+    "offline": "Server bilan aloqa tiklanmoqda..."
+  },
+  "processing": {
+    "title": "Yuz",
+    "accent": "aniqlanmoqda",
+    "subtitle": "Iltimos, kuting"
+  },
+  "success": {
+    "welcome": "Xush kelibsiz,"
+  },
+  "denied": {
+    "title": "Xonaga",
+    "accent": "ruxsat yo‘q!",
+    "subtitle": "Kechirasiz, {{name}}!"
+  },
+  "notFound": {
+    "title": "Foydalanuvchi",
+    "accent": "topilmadi!",
+    "text": "Tizimda ushbu foydalanuvchi ma’lumotlari mavjud emas."
+  },
+  "error": {
+    "title": "Xatolik",
+    "accent": "yuz berdi!",
+    "text": "Kutilmagan xato sodir bo‘ldi. Iltimos, qayta urinib ko‘ring yoki tizim administratoriga murojaat qiling."
+  },
+  "task": {
+    "titleOne": "Sizning vazifangiz",
+    "titleMany": "Sizning vazifalaringiz",
+    "count": "{{count}} ta",
+    "empty": "Bugungi kun uchun vazifa biriktirilmagan."
+  },
+  "user": {
+    "title": "Foydalanuvchi ma’lumotlari",
+    "fullName": "F.I.O.",
+    "position": "Lavozimi",
+    "room": "Xona",
+    "terminal": "Terminal"
+  },
+  "direction": {
+    "in": "Kirish",
+    "out": "Chiqish"
+  },
+  "roomSetup": {
+    "titleRequired": "Xona biriktirilmagan!",
+    "titleChange": "Xonani o‘zgartirish",
+    "textRequired": "Ushbu planshet hozircha hech bir xonaga biriktirilmagan. Iltimos, xonani tanlab, saqlang.",
+    "textChange": "Planshet biriktiriladigan xonani tanlab, saqlang.",
+    "noRooms": "Serverda faol xona topilmadi. Administrator xona qo‘shgach, “Qayta urinish”ni bosing.",
+    "loadError": "Xonalar ro‘yxatini olib bo‘lmadi",
+    "room": "Xona",
+    "placeholder": "Xonani tanlang"
+  }
+}

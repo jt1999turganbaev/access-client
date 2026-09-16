@@ -1,19 +1,21 @@
+import { useTranslation } from 'react-i18next';
 import { IconUser } from '@tabler/icons-react';
 import type { RecognizedUser } from '@/features/tablet/types';
 import classes from './info-card.module.css';
 
 export function UserInfoCard({ user }: { user: RecognizedUser }) {
+  const { t } = useTranslation();
   // F.I.O. — eng muhim maydon, alohida qatorda to'liq kenglikda (ism bo'linmasligi uchun)
   const fields = [
-    { label: 'Lavozimi', value: user.position },
-    { label: 'Xona', value: user.room },
-    { label: 'Terminal', value: user.terminal },
+    { label: t('user.position'), value: user.position },
+    { label: t('user.room'), value: user.room },
+    { label: t('user.terminal'), value: user.terminal },
   ].filter((field) => Boolean(field.value));
 
   return (
     <section className={classes.card}>
       <div className={classes.head}>
-        <div className={classes.title}>Foydalanuvchi ma’lumotlari</div>
+        <div className={classes.title}>{t('user.title')}</div>
         <div className={classes.chip}>
           <IconUser className={classes.chipIcon} stroke={2} />
         </div>
@@ -21,7 +23,7 @@ export function UserInfoCard({ user }: { user: RecognizedUser }) {
       <div className={classes.divider} />
 
       <div className={classes.nameRow}>
-        <div className={classes.label}>F.I.O.</div>
+        <div className={classes.label}>{t('user.fullName')}</div>
         <div className={`${classes.value} ${classes.name}`}>{user.fullName}</div>
       </div>
 

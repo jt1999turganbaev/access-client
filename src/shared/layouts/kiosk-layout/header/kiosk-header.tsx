@@ -1,24 +1,16 @@
+import { useTranslation } from 'react-i18next';
 import { useClock } from '@/shared/hooks';
 import classes from './kiosk-header.module.css';
 
 export function KioskHeader() {
+  const { t } = useTranslation();
   const { time, date, weekday } = useClock();
 
   return (
     <header className={classes.header}>
       <div className={classes.brand}>
-        <img
-          className={classes.logo}
-          src="/tmbm-logo.png"
-          alt="Tibbiyot va farmatsevtika xodimlarining malakasini baholash markazi"
-        />
-        <div className={classes.system}>
-          TIBBIYOT VA FARMATSEVTIKA
-          <br />
-          XODIMLARINING MALAKASINI
-          <br />
-          BAHOLASH MARKAZI
-        </div>
+        <img className={classes.logo} src="/tmbm-logo.png" alt={t('header.org')} />
+        <div className={classes.system}>{t('header.org')}</div>
       </div>
 
       <div className={classes.clock}>

@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { Navigate } from 'react-router-dom';
 import { StatusAvatar } from '@/shared/ui';
 import { TaskCard } from '../info-card/task-card';
@@ -7,6 +8,7 @@ import { ResultCountdown } from './result-countdown';
 import classes from './screens.module.css';
 
 export function SuccessScreen() {
+  const { t } = useTranslation();
   const { event } = useTablet();
   const user = event?.user;
 
@@ -19,7 +21,7 @@ export function SuccessScreen() {
       </div>
 
       <div className={classes.welcome}>
-        <div className={classes.welcomeText}>Xush kelibsiz,</div>
+        <div className={classes.welcomeText}>{t('success.welcome')}</div>
         <h1 className={classes.welcomeName}>{user.fullName}!</h1>
       </div>
 

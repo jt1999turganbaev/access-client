@@ -1,0 +1,92 @@
+{
+  "header": {
+    "org": "Medicinalıq hám farmacevtikalıq xızmetkerlerdiń mamanlıǵın bahalaw orayı"
+  },
+  "footer": {
+    "slogan": "Sanlı imkaniyatlar — Jańa Ózbekstan ushın"
+  },
+  "date": {
+    "format": "{{day}}-{{month}}, {{year}}",
+    "months": [
+      "yanvar",
+      "fevral",
+      "mart",
+      "aprel",
+      "may",
+      "iyun",
+      "iyul",
+      "avgust",
+      "sentyabr",
+      "oktyabr",
+      "noyabr",
+      "dekabr"
+    ],
+    "weekdays": ["Ekshembi", "Dúyshembi", "Siyshembi", "Sárshembi", "Piyshembi", "Juma", "Shembi"]
+  },
+  "common": {
+    "back": "Artqa qaytıw",
+    "retry": "Qayta urınıw",
+    "save": "Saqlaw",
+    "loading": "Júklenbekte...",
+    "settings": "Sazlaw",
+    "language": "Til"
+  },
+  "idle": {
+    "roomTitle": "{{number}}-sanlı bólmege kiriw ushın",
+    "roomAccent": "identifikaciyadan ótiń",
+    "title": "Kiriw sisteması",
+    "accent": "tayın",
+    "online": "Júzdi tanıw sisteması belsendi",
+    "offline": "Server menen baylanıs tiklenbekte..."
+  },
+  "processing": {
+    "title": "Júz",
+    "accent": "anıqlanbaqta",
+    "subtitle": "Iltimas, kútiń"
+  },
+  "success": {
+    "welcome": "Xosh kelipsiz,"
+  },
+  "denied": {
+    "title": "Bólmege",
+    "accent": "ruqsat joq!",
+    "subtitle": "Keshiriń, {{name}}!"
+  },
+  "notFound": {
+    "title": "Paydalanıwshı",
+    "accent": "tabılmadı!",
+    "text": "Sistemada bul paydalanıwshı maǵlıwmatları joq."
+  },
+  "error": {
+    "title": "Qátelik",
+    "accent": "júz berdi!",
+    "text": "Kútilmegen qátelik júz berdi. Iltimas, qaytadan urınıp kóriń yamasa sistema administratorına xabarlasıń."
+  },
+  "task": {
+    "titleOne": "Siziń wazıypańız",
+    "titleMany": "Siziń wazıypalarıńız",
+    "count": "{{count}} dana",
+    "empty": "Búgingi kún ushın wazıypa biriktirilmegen."
+  },
+  "user": {
+    "title": "Paydalanıwshı maǵlıwmatları",
+    "fullName": "A.Á.Á.",
+    "position": "Laozımı",
+    "room": "Bólme",
+    "terminal": "Terminal"
+  },
+  "direction": {
+    "in": "Kiriw",
+    "out": "Shıǵıw"
+  },
+  "roomSetup": {
+    "titleRequired": "Bólme biriktirilmegen!",
+    "titleChange": "Bólmeni ózgertiw",
+    "textRequired": "Bul planshet házirshe hesh bir bólmege biriktirilmegen. Iltimas, bólmeni saylap, saqlań.",
+    "textChange": "Planshet biriktiriletuǵın bólmeni saylap, saqlań.",
+    "noRooms": "Serverde belsendi bólme tabılmadı. Administrator bólme qosqannan soń, “Qayta urınıw”dı basıń.",
+    "loadError": "Bólmeler dizimin alıp bolmadı",
+    "room": "Bólme",
+    "placeholder": "Bólmeni saylań"
+  }
+}

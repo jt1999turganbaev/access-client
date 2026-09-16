@@ -1,29 +1,23 @@
 import dayjs from 'dayjs';
+import { i18n } from '@/shared/config/i18n';
 
-const MONTHS = [
-  'yanvar',
-  'fevral',
-  'mart',
-  'aprel',
-  'may',
-  'iyun',
-  'iyul',
-  'avgust',
-  'sentabr',
-  'oktabr',
-  'noyabr',
-  'dekabr',
-];
-
-const WEEKDAYS = ['Yakshanba', 'Dushanba', 'Seshanba', 'Chorshanba', 'Payshanba', 'Juma', 'Shanba'];
+/** Oy va hafta kuni nomlari joriy tildagi tarjimalardan olinadi */
+const names = (key: 'date.months' | 'date.weekdays') => {
+  const list = i18n.t(key, { returnObjects: true });
+  return Array.isArray(list) ? (list as string[]) : [];
+};
 
 export function formatDate(value: dayjs.Dayjs | string | Date) {
   const d = dayjs(value);
-  return `${d.date()}-${MONTHS[d.month()]}, ${d.year()}`;
+  return i18n.t('date.format', {
+    day: d.date(),
+    month: names('date.months')[d.month()] ?? d.format('MM'),
+    year: d.year(),
+  });
 }
 
 export function formatWeekday(value: dayjs.Dayjs | string | Date) {
-  return WEEKDAYS[dayjs(value).day()];
+  return names('date.weekdays')[dayjs(value).day()] ?? '';
 }
 
 export function formatTime(value: dayjs.Dayjs | string | Date, withSeconds = false) {

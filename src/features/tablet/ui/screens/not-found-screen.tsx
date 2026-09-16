@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { Navigate } from 'react-router-dom';
 import { Button } from '@mantine/core';
 import { IconArrowLeft } from '@tabler/icons-react';
@@ -8,6 +9,7 @@ import { ResultCountdown } from './result-countdown';
 import classes from './screens.module.css';
 
 export function NotFoundScreen() {
+  const { t } = useTranslation();
   const { event, reset } = useTablet();
 
   if (event?.status !== 'not_found') return <Navigate to={ROUTES.IDLE} replace />;
@@ -20,14 +22,10 @@ export function NotFoundScreen() {
 
       <StatusHeading
         compact
-        title="Foydalanuvchi"
-        accent="topilmadi!"
+        title={t('notFound.title')}
+        accent={t('notFound.accent')}
         accentColor="red"
-        subtitle={
-          <span className={classes.notFoundText}>
-            Tizimda ushbu foydalanuvchi ma’lumotlari mavjud emas.
-          </span>
-        }
+        subtitle={<span className={classes.notFoundText}>{t('notFound.text')}</span>}
       />
 
       <div className={classes.actions}>
@@ -39,7 +37,7 @@ export function NotFoundScreen() {
           leftSection={<IconArrowLeft className={classes.backIcon} />}
           onClick={reset}
         >
-          Orqaga qaytish
+          {t('common.back')}
         </Button>
       </div>
       <ResultCountdown danger />

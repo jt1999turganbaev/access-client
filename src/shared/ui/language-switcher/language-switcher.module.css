@@ -1,0 +1,47 @@
+/* Pastki o'ng burchak — chapdagi Sozlash tugmasi bilan bir qatorda */
+.target {
+  position: fixed;
+  right: 1.6rem;
+  bottom: 1.2rem;
+  z-index: 100;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  height: 3.4rem;
+  padding: 0 1.3rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(190, 212, 243, 0.9);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-value);
+  color: #4a6094;
+  white-space: nowrap;
+}
+
+.icon {
+  width: 1.9rem;
+  height: 1.9rem;
+}
+
+.chevron {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+.dropdown {
+  padding: 0.6rem;
+  border: 1px solid #d6e3f7;
+}
+
+.item {
+  font-size: var(--fs-base);
+  font-weight: 600;
+  color: var(--ac-navy);
+  padding: 1.1rem 1.2rem;
+  border-radius: 0.8rem;
+}
+
+.active {
+  background: #eaf2ff;
+  color: var(--ac-blue);
+}

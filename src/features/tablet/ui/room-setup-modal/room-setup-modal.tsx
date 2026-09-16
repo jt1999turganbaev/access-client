@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Alert, Button, Modal, Select } from '@mantine/core';
 import {
   IconAlertCircle,
@@ -10,6 +11,7 @@ import { useTablet } from '@/features/tablet/tablet-context/tablet-context';
 import classes from './room-setup-modal.module.css';
 
 export function RoomSetupModal() {
+  const { t } = useTranslation();
   const {
     roomSetupOpen,
     needsRoomSetup,
@@ -58,19 +60,17 @@ export function RoomSetupModal() {
         </div>
 
         <div className={classes.title}>
-          {needsRoomSetup ? 'Xona biriktirilmagan!' : 'Xonani o‘zgartirish'}
+          {needsRoomSetup ? t('roomSetup.titleRequired') : t('roomSetup.titleChange')}
         </div>
         <div className={classes.text}>
-          {needsRoomSetup
-            ? 'Ushbu planshet hozircha hech bir xonaga biriktirilmagan. Iltimos, xonani tanlab, saqlang.'
-            : 'Planshet biriktiriladigan xonani tanlab, saqlang.'}
+          {needsRoomSetup ? t('roomSetup.textRequired') : t('roomSetup.textChange')}
         </div>
 
         {!roomsError && !roomsLoading && options.length === 0 && (
           <Alert className={classes.alert} color="orange" icon={<IconAlertCircle />}>
-            Serverda faol xona topilmadi. Administrator xona qo‘shgach, “Qayta urinish”ni bosing.
+            {t('roomSetup.noRooms')}
             <Button size="xs" variant="light" color="orange" mt="0.8rem" onClick={refetchRooms}>
-              Qayta urinish
+              {t('common.retry')}
             </Button>
           </Alert>
         )}
@@ -80,18 +80,18 @@ export function RoomSetupModal() {
             className={classes.alert}
             color="red"
             icon={<IconAlertCircle />}
-            title="Xonalar ro‘yxatini olib bo‘lmadi"
+            title={t('roomSetup.loadError')}
           >
             <Button size="xs" variant="light" color="red" onClick={refetchRooms}>
-              Qayta urinish
+              {t('common.retry')}
             </Button>
           </Alert>
         )}
 
         <div className={classes.field}>
           <Select
-            label="Xona"
-            placeholder={roomsLoading ? 'Yuklanmoqda...' : 'Xonani tanlang'}
+            label={t('roomSetup.room')}
+            placeholder={roomsLoading ? t('common.loading') : t('roomSetup.placeholder')}
             data={options}
             value={value}
             onChange={setValue}
@@ -153,7 +153,7 @@ export function RoomSetupModal() {
           disabled={!value}
           onClick={handleSave}
         >
-          Saqlash
+          {t('common.save')}
         </Button>
       </div>
     </Modal>

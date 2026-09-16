@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { Navigate } from 'react-router-dom';
 import { Button } from '@mantine/core';
 import { IconArrowLeft } from '@tabler/icons-react';
@@ -9,6 +10,7 @@ import { ResultCountdown } from './result-countdown';
 import classes from './screens.module.css';
 
 export function DeniedScreen() {
+  const { t } = useTranslation();
   const { event, reset } = useTablet();
   const user = event?.user;
 
@@ -22,10 +24,10 @@ export function DeniedScreen() {
 
       <StatusHeading
         compact
-        title="Xonaga"
-        accent="ruxsat yo‘q!"
+        title={t('denied.title')}
+        accent={t('denied.accent')}
         accentColor="red"
-        subtitle={`Kechirasiz, ${user.fullName}!`}
+        subtitle={t('denied.subtitle', { name: user.fullName })}
       />
 
       <UserInfoCard user={user} />
@@ -39,7 +41,7 @@ export function DeniedScreen() {
           leftSection={<IconArrowLeft className={classes.backIcon} />}
           onClick={reset}
         >
-          Orqaga qaytish
+          {t('common.back')}
         </Button>
       </div>
       <ResultCountdown danger />

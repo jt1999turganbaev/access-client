@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { LanguageSwitcher } from '@/shared/ui';
 import { KioskHeader } from '../header/kiosk-header';
 import { KioskFooter } from '../footer/kiosk-footer';
 import classes from './kiosk-layout.module.css';
@@ -14,6 +15,7 @@ export function KioskLayout({ children }: { children: ReactNode }) {
       </div>
 
       <KioskFooter />
+      <LanguageSwitcher />
     </div>
   );
 }

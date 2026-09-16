@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { ActionIcon, Portal } from '@mantine/core';
 import { IconSettings } from '@tabler/icons-react';
 import { IdentityCircle, StatusHeading } from '@/shared/ui';
@@ -5,6 +6,7 @@ import { useTablet } from '@/features/tablet/tablet-context/tablet-context';
 import classes from './screens.module.css';
 
 export function IdleScreen() {
+  const { t } = useTranslation();
   const { openRoomSetup, room, connected } = useTablet();
 
   return (
@@ -15,22 +17,18 @@ export function IdleScreen() {
         // Xona tanlangan bo'lsa, sarlavhada o'sha xona raqami ko'rinadi
         <div className={classes.roomHeading}>
           <StatusHeading
-            title={`${room.number} raqamli xonaga kirish uchun`}
-            accent="identifikatsiyadan o'ting"
+            title={t('idle.roomTitle', { number: room.number })}
+            accent={t('idle.roomAccent')}
             accentColor="blue"
           />
         </div>
       ) : (
-        <StatusHeading
-          title="Kirish tizimi"
-          accent="tayyor"
-          accentColor="blue"
-        />
+        <StatusHeading title={t('idle.title')} accent={t('idle.accent')} accentColor="blue" />
       )}
 
       <div className={`${classes.pill} ${connected ? '' : classes.pillOffline}`}>
         <span className={classes.dot} />
-        {connected ? 'Yuzni tanish tizimi faol' : 'Server bilan aloqa tiklanmoqda...'}
+        {connected ? t('idle.online') : t('idle.offline')}
       </div>
 
       {/* Portal: tugma layout'ning stacking context'idan chiqariladi — footer ustida qoladi */}
@@ -39,8 +37,10 @@ export function IdleScreen() {
           className={classes.settings}
           variant="white"
           radius="xl"
-          aria-label={room ? `Sozlash · ${room.number} ${room.name}` : 'Sozlash'}
-          title={room ? `${room.number} ${room.name}` : 'Sozlash'}
+          aria-label={
+            room ? `${t('common.settings')} · ${room.number} ${room.name}` : t('common.settings')
+          }
+          title={room ? `${room.number} ${room.name}` : t('common.settings')}
           onClick={openRoomSetup}
           styles={{
             root: {

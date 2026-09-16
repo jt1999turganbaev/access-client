@@ -1,0 +1,92 @@
+{
+  "header": {
+    "org": "Center for Qualification Assessment of Medical and Pharmaceutical Workers"
+  },
+  "footer": {
+    "slogan": "Digital opportunities — for New Uzbekistan"
+  },
+  "date": {
+    "format": "{{month}} {{day}}, {{year}}",
+    "months": [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ],
+    "weekdays": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+  },
+  "common": {
+    "back": "Go back",
+    "retry": "Try again",
+    "save": "Save",
+    "loading": "Loading...",
+    "settings": "Settings",
+    "language": "Language"
+  },
+  "idle": {
+    "roomTitle": "To enter room {{number}},",
+    "roomAccent": "please identify yourself",
+    "title": "Access system",
+    "accent": "ready",
+    "online": "Face recognition is active",
+    "offline": "Reconnecting to the server..."
+  },
+  "processing": {
+    "title": "Recognizing",
+    "accent": "your face",
+    "subtitle": "Please wait"
+  },
+  "success": {
+    "welcome": "Welcome,"
+  },
+  "denied": {
+    "title": "Access",
+    "accent": "denied!",
+    "subtitle": "Sorry, {{name}}!"
+  },
+  "notFound": {
+    "title": "User",
+    "accent": "not found!",
+    "text": "This user’s details are not in the system."
+  },
+  "error": {
+    "title": "Something",
+    "accent": "went wrong!",
+    "text": "An unexpected error occurred. Please try again or contact the system administrator."
+  },
+  "task": {
+    "titleOne": "Your task",
+    "titleMany": "Your tasks",
+    "count": "{{count}} total",
+    "empty": "No tasks assigned for today."
+  },
+  "user": {
+    "title": "User details",
+    "fullName": "Full name",
+    "position": "Position",
+    "room": "Room",
+    "terminal": "Terminal"
+  },
+  "direction": {
+    "in": "Entry",
+    "out": "Exit"
+  },
+  "roomSetup": {
+    "titleRequired": "No room assigned!",
+    "titleChange": "Change room",
+    "textRequired": "This tablet is not assigned to any room yet. Please select a room and save.",
+    "textChange": "Select the room for this tablet and save.",
+    "noRooms": "No active rooms found on the server. Once an administrator adds a room, tap “Try again”.",
+    "loadError": "Could not load the room list",
+    "room": "Room",
+    "placeholder": "Select a room"
+  }
+}
