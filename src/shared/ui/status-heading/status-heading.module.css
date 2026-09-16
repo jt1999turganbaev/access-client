@@ -1,0 +1,52 @@
+.wrap {
+  flex: none;
+  text-align: center;
+  animation: fade 420ms ease both;
+}
+
+.title {
+  margin: 0;
+  font-size: var(--fs-display);
+  font-weight: var(--fw-display);
+  line-height: 1.12;
+  color: var(--ac-navy);
+  letter-spacing: -0.03rem;
+}
+
+.compact .title {
+  font-size: var(--fs-title);
+}
+
+.compact .subtitle {
+  font-size: var(--fs-md);
+}
+
+.accentBlue {
+  color: var(--ac-blue);
+}
+
+.accentGreen {
+  color: var(--ac-green);
+}
+
+.accentRed {
+  color: var(--ac-red);
+}
+
+.subtitle {
+  margin-top: 0.7rem;
+  font-size: var(--fs-md);
+  font-weight: 600;
+  color: #6b83b0;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+    transform: translateY(0.8rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

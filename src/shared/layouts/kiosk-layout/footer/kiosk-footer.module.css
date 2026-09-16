@@ -1,0 +1,54 @@
+/* Pastki bo'sh joy fondagi milliy naqsh ustida qolishi uchun */
+.footer {
+  position: relative;
+  z-index: 1;
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.8rem;
+  padding: 0 3.2rem 9.5vh;
+  /* Footer faqat bezak: pastki burchakdagi Sozlash tugmasiga bosishni to'smasin */
+  pointer-events: none;
+}
+
+.slogan {
+  width: 100%;
+  max-width: 47.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+}
+
+.sloganText {
+  flex: none;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-label);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: #7f95c0;
+}
+
+.line {
+  flex: 1 1 0;
+  min-width: 1.5rem;
+  height: 1px;
+  background: #bcd3f3;
+}
+
+.line:first-child {
+  background: linear-gradient(90deg, transparent, #bcd3f3);
+}
+
+.line:last-child {
+  background: linear-gradient(90deg, #bcd3f3, transparent);
+}
+
+.logo {
+  display: block;
+  height: 4rem;
+  width: auto;
+  aspect-ratio: 192 / 39;
+}

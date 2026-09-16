@@ -1,0 +1,170 @@
+/* DEFAULT / PROCESSING: markazda */
+.center {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  padding-bottom: 2rem;
+}
+
+/* SUCCESS / DENIED / NOT FOUND: yuqoridan pastga */
+.result {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 1.5rem;
+  padding-top: 1rem;
+}
+
+.avatarRow {
+  flex: none;
+  display: flex;
+  justify-content: center;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 1.2rem 2.4rem;
+  border-radius: 999px;
+  background: rgba(235, 250, 241, 0.94);
+  border: 1px solid #cfeedd;
+  font-size: var(--fs-md);
+  font-weight: var(--fw-value);
+  color: #3f8a60;
+  margin-top: -1rem;
+}
+
+.dot {
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 0 0.35rem rgba(34, 197, 94, 0.18);
+  animation: blink 2s ease-in-out infinite;
+}
+
+.pillOffline {
+  background: rgba(255, 246, 233, 0.94);
+  border-color: #f6dcb4;
+  color: #b06b17;
+}
+
+.pillOffline .dot {
+  background: #f59e0b;
+  box-shadow: 0 0 0 0.35rem rgba(245, 158, 11, 0.2);
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+/* Sozlash: o'lcham va fon `styles` propida — Mantine ularni inline yozadi,
+   shuning uchun bu yerdan faqat soya beriladi. */
+.settings {
+  box-shadow: 0 0.6rem 1.6rem -1rem rgba(23, 57, 138, 0.35);
+}
+
+.settingsIcon {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.actions {
+  flex: none;
+  display: flex;
+  justify-content: center;
+  margin-top: 0.4rem;
+}
+
+/* Balandlik, radius va shrift `styles` propida — Mantine ularni inline yozadi */
+.backBtn {
+  min-width: 26rem;
+}
+
+.backIcon {
+  width: 2rem;
+  height: 2rem;
+}
+
+.errorIconWrap {
+  width: 15rem;
+  height: 15rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff1f1 40%, #fff7f7 100%);
+  border: 0.3rem solid #ffd9d9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ef4444;
+}
+
+.errorIcon {
+  width: 46%;
+  height: 46%;
+  shape-rendering: geometricPrecision;
+}
+
+.errorDetail {
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: 1rem 1.4rem;
+  border-radius: 0.8rem;
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid var(--ac-border);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: var(--fs-sm);
+  color: #8a4a4a;
+  text-align: center;
+  word-break: break-word;
+}
+
+/* Qolgan vaqt: yupqa chiziq, ekran o'zi yopilishini bildiradi */
+.countdown {
+  flex: none;
+  margin-top: auto;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.55);
+  overflow: hidden;
+}
+
+.countdownFill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #7fc9a0, #35a06a);
+  animation-name: countdown;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+.countdownDanger .countdownFill {
+  background: linear-gradient(90deg, #f6a6a6, #e15b5b);
+}
+
+@keyframes countdown {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+}
+
+.notFoundText {
+  display: block;
+  max-width: 40rem;
+  margin: 0 auto;
+}

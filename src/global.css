@@ -1,0 +1,81 @@
+:root {
+  --ac-bg-1: #fbfdff;
+  --ac-bg-2: #eaf2fe;
+  --ac-bg-3: #dfeafc;
+
+  --ac-navy: #17398a;
+  --ac-blue: #0d5bd8;
+  --ac-blue-soft: #1668e3;
+  --ac-blue-pale: #d7e6fd;
+
+  --ac-text: #56688c;
+  --ac-muted: #8091b3;
+
+  --ac-green: #16a34a;
+  --ac-green-soft: #35c46a;
+  --ac-red: #ef3535;
+  --ac-red-soft: #ff5a5a;
+
+  --ac-card: #ffffff;
+  --ac-border: #e4ecf9;
+
+  /* Yagona shrift shkalasi (1rem = 1080px ekranda 20px) */
+  --fs-display: 4rem;
+  --fs-title: 3.2rem;
+  --fs-xl: 2.4rem;
+  --fs-lg: 1.9rem;
+  --fs-md: 1.6rem;
+  --fs-base: 1.4rem;
+  --fs-sm: 1.2rem;
+  --fs-xs: 1rem;
+
+  --fw-label: 600;
+  --fw-value: 700;
+  --fw-title: 800;
+  --fw-display: 900;
+
+  --ac-radius: 1.6rem;
+  --ac-shadow: 0 1.2rem 2.6rem -1.4rem rgba(14, 42, 107, 0.3);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/*
+ * Kiosk: 1080x1920 (FHD) va 768x1366 (HD) portret ekranlar.
+ * Maket 1080px enga chizilgan, 1rem = 20px. Ekran kichik bo'lsa hamma narsa
+ * proporsional kichrayadi (768px da 1rem ≈ 14.2px). Mantine ham rem ishlatadi.
+ */
+html {
+  font-size: calc(min(100vw, 56.25vh) / 54);
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--ac-text);
+  background: var(--ac-bg-1);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
+  touch-action: manipulation;
+}
+
+/* Kiosk rejimi: matn tanlash va uzoq bosishdagi menyular o'chirilgan */
+body,
+#root {
+  user-select: none;
+}
+
+img {
+  max-width: 100%;
+}

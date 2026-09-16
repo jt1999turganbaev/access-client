@@ -1,0 +1,198 @@
+.card {
+  flex: none;
+  background: var(--ac-card);
+  border: 1px solid var(--ac-border);
+  border-radius: var(--ac-radius);
+  box-shadow: var(--ac-shadow);
+  padding: 2.1rem 2.6rem 2.3rem;
+  animation: rise 420ms ease both;
+}
+
+/* Task kartasi qolgan bo'sh joyni to'liq egallaydi (pastgacha), matn sig'masa
+   faqat ro'yxatning ichida scroll bo'ladi — karta hech qachon qisilib qolmaydi */
+.cardGrow {
+  flex: 1 1 auto;
+  min-height: 12rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.head {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
+}
+
+.headLeft {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.title {
+  font-size: var(--fs-lg);
+  font-weight: 800;
+  color: var(--ac-navy);
+}
+
+.chip {
+  width: 3.4rem;
+  height: 3.4rem;
+  border-radius: 0.8rem;
+  background: #eaf2ff;
+  color: var(--ac-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+
+.chipIcon {
+  width: 1.9rem;
+  height: 1.9rem;
+}
+
+.chipGreen {
+  background: #e6f7ed;
+  color: var(--ac-green);
+}
+
+.divider {
+  flex: none;
+  height: 1px;
+  background: var(--ac-border);
+  margin: 1.2rem 0 1.4rem;
+}
+
+.nameRow {
+  margin-bottom: 1.6rem;
+}
+
+.grid {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: auto;
+  justify-content: stretch;
+  gap: 2rem;
+}
+
+.field {
+  min-width: 0;
+}
+
+.field + .field {
+  border-left: 1px solid var(--ac-border);
+  padding-left: 1.8rem;
+}
+
+.label {
+  font-size: var(--fs-base);
+  font-weight: var(--fw-label);
+  color: var(--ac-muted);
+  margin-bottom: 0.6rem;
+}
+
+.value {
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-value);
+  color: var(--ac-navy);
+  line-height: 1.3;
+  overflow-wrap: break-word;
+}
+
+/* Ism — kartadagi eng muhim matn; hech qachon so'z o'rtasidan bo'linmaydi */
+.value.name {
+  font-size: var(--fs-xl);
+  line-height: 1.15;
+  overflow-wrap: normal;
+  word-break: keep-all;
+  hyphens: none;
+}
+
+.badge {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-value);
+  color: #5d729c;
+  background: #eef3fb;
+  border-radius: 999px;
+  padding: 0.35rem 1.1rem;
+  flex: none;
+}
+
+.tasks {
+  min-height: 6rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  scrollbar-width: thin;
+}
+
+.task {
+  flex: none;
+  display: flex;
+  gap: 1.2rem;
+  background: #f2fbf6;
+  border: 1px solid #d7f0e1;
+  border-radius: 1rem;
+  padding: 1.3rem 1.6rem;
+}
+
+.taskIndex {
+  flex: none;
+  width: 1.9rem;
+  height: 1.9rem;
+  border-radius: 0.6rem;
+  background: #ffffff;
+  color: var(--ac-green);
+  border: 1px solid #cbe9d7;
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-title);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* O'qish qulay bo'lishi uchun: qator oralig'i keng, qator uzunligi cheklangan */
+.taskText {
+  font-size: var(--fs-base);
+  font-weight: var(--fw-label);
+  line-height: 1.6;
+  letter-spacing: 0.005em;
+  color: #235a3c;
+  max-width: 38rem;
+}
+
+/* Matn uzun bo'lsa — biroz kichikroq, shunda scrollsiz sig'adi */
+.taskTextCompact {
+  font-size: var(--fs-sm);
+  line-height: 1.55;
+  max-width: 42rem;
+}
+
+.taskTitle {
+  font-size: var(--fs-md);
+  font-weight: var(--fw-title);
+  color: #1c4a31;
+  margin-bottom: 0.6rem;
+  line-height: 1.25;
+}
+
+.empty {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-label);
+  color: var(--ac-muted);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

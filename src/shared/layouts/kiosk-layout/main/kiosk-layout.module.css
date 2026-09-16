@@ -1,0 +1,44 @@
+/* Butun ekranni egallaydi, scroll yo'q */
+.root {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: var(--ac-bg-2);
+}
+
+/* Umumiy fon: nurlar + bino + naqsh (public/background.jpg) */
+.bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(60% 40% at 50% 38%, rgba(255, 255, 255, 0.55), transparent 70%),
+    url('/background.jpg');
+  background-size: cover, cover;
+  background-position: center, center bottom;
+  background-repeat: no-repeat;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  /* Ekran 9:16 bo'lmasa ham (10:16, 3:4 planshetlar) to'liq enni egallaydi */
+  width: 100%;
+  padding: 3rem 3.2rem 0;
+}
+
+.main {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 1.2rem;
+}

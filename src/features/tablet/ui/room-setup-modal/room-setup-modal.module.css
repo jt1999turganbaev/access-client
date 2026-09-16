@@ -1,0 +1,80 @@
+.body {
+  padding: 0.4rem 0.4rem 0.2rem;
+  text-align: center;
+}
+
+.iconWrap {
+  position: relative;
+  width: 9.6rem;
+  height: 9.6rem;
+  margin: 0 auto 1.6rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, #eaf3ff 30%, #f4f9ff 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ac-blue);
+}
+
+.icon {
+  width: 4.8rem;
+  height: 4.8rem;
+}
+
+.iconBadge {
+  position: absolute;
+  right: 0.4rem;
+  bottom: 0.6rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: var(--ac-blue);
+  color: #ffffff;
+  font-weight: 900;
+  font-size: var(--fs-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0.3rem solid #ffffff;
+}
+
+.title {
+  font-size: var(--fs-xl);
+  font-weight: 900;
+  color: var(--ac-navy);
+  margin-bottom: 0.8rem;
+}
+
+.text {
+  font-size: var(--fs-base);
+  font-weight: var(--fw-label);
+  color: #6d80a8;
+  line-height: 1.5;
+  margin-bottom: 2rem;
+}
+
+.alert {
+  text-align: left;
+  margin-bottom: 1.4rem;
+}
+
+.field {
+  text-align: left;
+  margin-bottom: 1.6rem;
+}
+
+.chevron {
+  width: 2.2rem;
+  height: 2.2rem;
+  color: #6f86b5;
+}
+
+/* O'lchamlar `styles` propida */
+.submit {
+  margin-top: 0.2rem;
+}
+
+.submitIcon {
+  width: 1.8rem;
+  height: 1.8rem;
+}

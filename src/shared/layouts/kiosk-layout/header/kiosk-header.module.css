@@ -1,0 +1,61 @@
+/*
+ * Tepa qism: chapda tizim nomi, o'ngda soat. Fon ustida to'g'ridan-to'g'ri —
+ * plashka, hoshiya va soya yo'q. Ranglar aniq, lekin to'q ko'k emas.
+ */
+.header {
+  flex: none;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.6rem;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+}
+
+.logo {
+  flex: none;
+  display: block;
+  height: 6.4rem;
+  width: auto;
+  aspect-ratio: 1 / 1;
+}
+
+.system {
+  font-size: var(--fs-base);
+  font-weight: var(--fw-value);
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+  color: #4a6094;
+}
+
+.clock {
+  text-align: right;
+}
+
+.time {
+  font-size: var(--fs-display);
+  font-weight: var(--fw-title);
+  line-height: 1;
+  color: #2b55a8;
+  font-variant-numeric: tabular-nums;
+}
+
+.weekday {
+  margin-top: 0.6rem;
+  font-size: var(--fs-base);
+  font-weight: var(--fw-value);
+  color: #4a6094;
+  line-height: 1.2;
+}
+
+.date {
+  margin-top: 0.2rem;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-label);
+  color: #8093b8;
+  line-height: 1.2;
+}
