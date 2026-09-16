@@ -95,12 +95,22 @@ export function RoomSetupModal() {
             data={options}
             value={value}
             onChange={setValue}
-            searchable
-            nothingFoundMessage="Xona topilmadi"
+            /* Qidiruv yo'q: input faqat o'qish uchun bo'ladi va planshetda
+               ekran klaviaturasi chiqmaydi (klaviatura ekranni siljitardi). */
+            searchable={false}
+            inputMode="none"
+            allowDeselect={false}
             disabled={roomsLoading}
             rightSection={<IconChevronDown className={classes.chevron} stroke={2} />}
             rightSectionPointerEvents="none"
-            comboboxProps={{ zIndex: 1000, offset: 6, shadow: 'md' }}
+            comboboxProps={{
+              zIndex: 1000,
+              offset: 6,
+              shadow: 'md',
+              // Ro'yxat doim pastga ochiladi — tepaga sakrab o'tmaydi
+              position: 'bottom',
+              middlewares: { flip: false, shift: false },
+            }}
             /* O'lchamlar inline beriladi: Mantine ularni CSS o'zgaruvchilari
                orqali elementga yozadi va klassdagi qiymatlar ishlamaydi. */
             styles={{
