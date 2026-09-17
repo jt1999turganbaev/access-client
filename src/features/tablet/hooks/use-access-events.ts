@@ -25,6 +25,11 @@ const BACKLOG_WINDOW_MAX = 3_000;
 const BACKLOG_ARM_TIMEOUT = 10_000;
 /** Shundan yangi hodisa jonli deb hisoblanadi — odam hali terminal oldida (ms) */
 const LIVE_EVENT_AGE = 3_000;
+/**
+ * O'tmishdagi hodisadan shundan kam vaqt qolgan bo'lsa ekran ochilmaydi —
+ * bir lahza chaqnab yopilgandan ko'ra bosh sahifada qolgani yaxshi (ms).
+ */
+const MIN_REMAINING = 2_000;
 
 /**
  * Xonadagi identifikatsiyalarni tinglaydi:
@@ -96,14 +101,15 @@ export function useAccessEvents() {
     };
 
     /**
-     * O'tmishdagi hodisadan qancha vaqt qolgan (ms). Vaqti tugagan bo'lsa — `null`,
-     * ya'ni hodisa ekranda umuman ko'rsatilmaydi.
+     * O'tmishdagi hodisadan qancha vaqt qolgan (ms). Vaqti tugagan yoki juda oz
+     * qolgan bo'lsa — `null`, ya'ni hodisa ekranda umuman ko'rsatilmaydi.
      */
     const remainingFor = (display: AccessDisplay, event: AccessEvent) => {
       const timeout = screenTimeout(event);
       // Terminal soati oldinda bo'lsa yosh manfiy chiqadi — hodisa yangi deb hisoblanadi
       const age = Math.max(dayjs().diff(dayjs(display.captured_at)), 0);
-      return age < timeout ? timeout - age : null;
+      const remaining = timeout - age;
+      return remaining >= MIN_REMAINING ? remaining : null;
     };
 
     /**
