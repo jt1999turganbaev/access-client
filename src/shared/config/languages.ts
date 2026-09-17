@@ -12,3 +12,6 @@ export const LANGUAGES = [
 export type LanguageCode = (typeof LANGUAGES)[number]['code'];
 
 export const SUPPORTED_LANGUAGES: LanguageCode[] = LANGUAGES.map((item) => item.code);
+
+/** Sozlamalarda tanlash uchun ko'rsatiladigan tillar — qolganlari tarjimada saqlanadi */
+export const SELECTABLE_LANGUAGES = LANGUAGES.filter((item) => item.code === 'qq' || item.code === 'uz');

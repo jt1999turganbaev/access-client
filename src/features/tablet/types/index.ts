@@ -19,6 +19,8 @@ export interface AccessDisplay {
   /** Terminal tanimagan bo'lsa ham ismi kelishi mumkin */
   reported_name: string | null;
   task: { id: number; name: string; description: string | null } | null;
+  /** Salomlashish ovozi — kelsa SSE hodisasida ijro etiladi */
+  greeting_audio_url?: string | null;
 }
 
 /* ---------- Klient (UI) ---------- */
@@ -51,4 +53,5 @@ export interface AccessEvent {
   user?: RecognizedUser | null;
   /** ISO datetime */
   occurredAt: string;
+  greetingAudioUrl: string | null;
 }

@@ -34,13 +34,14 @@ export const roomLabel = (room: Room) =>
 const directionLabel = (direction: AccessDisplay['direction']) =>
   direction === 'in' || direction === 'out' ? i18n.t(`direction.${direction}`) : '—';
 
-export function resolvePhoto(photo: string | null | undefined) {
-  if (!photo || typeof photo !== 'string') return null;
-  if (/^(https?:|data:|blob:)/.test(photo)) return photo;
+/** Rasm/audio yo'li nisbiy kelsa backend manziliga bog'lanadi */
+export function resolveMediaUrl(path: string | null | undefined) {
+  if (!path || typeof path !== 'string') return null;
+  if (/^(https?:|data:|blob:)/.test(path)) return path;
   try {
-    return new URL(photo, env.backendOrigin).toString();
+    return new URL(path, env.backendOrigin).toString();
   } catch {
-    // Noto'g'ri yo'l — rasmsiz ko'rsatamiz, ekran buzilmasin
+    // Noto'g'ri yo'l — faylsiz ko'rsatamiz, ekran buzilmasin
     return null;
   }
 }
@@ -64,12 +65,13 @@ export function toAccessEvent(display: AccessDisplay, room: Room | null): Access
     id: typeof display.event_id === 'number' ? display.event_id : 0,
     status,
     occurredAt: text(display.captured_at) ?? new Date().toISOString(),
+    greetingAudioUrl: resolveMediaUrl(text(display.greeting_audio_url)),
     user: user
       ? {
           id: user.id ?? 0,
           // Ism kelmasa terminal aytgan nomga, u ham bo'lmasa chiziqchaga tushamiz
           fullName: text(user.full_name) ?? text(display.reported_name) ?? '—',
-          photoUrl: resolvePhoto(user.photo),
+          photoUrl: resolveMediaUrl(user.photo),
           position: null,
           room: room ? roomLabel(room) : '—',
           terminal: directionLabel(display.direction),

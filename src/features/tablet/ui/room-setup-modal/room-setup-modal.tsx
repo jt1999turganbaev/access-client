@@ -8,7 +8,7 @@ import {
   IconDoorExit,
 } from '@tabler/icons-react';
 import { useTablet } from '@/features/tablet/tablet-context/tablet-context';
-import { LANGUAGES, type LanguageCode } from '@/shared/config/languages';
+import { SELECTABLE_LANGUAGES, type LanguageCode } from '@/shared/config/languages';
 import classes from './room-setup-modal.module.css';
 
 /**
@@ -62,7 +62,11 @@ const selectProps = (chevronClass: string): Partial<SelectProps> => ({
   },
 });
 
-const languageOptions = LANGUAGES.map((item) => ({ value: item.code, label: item.label }));
+const languageOptions = SELECTABLE_LANGUAGES.map((item) => ({ value: item.code, label: item.label }));
+
+// Joriy til tanlovda bo'lmasa (masalan, ru/en saqlangan), birinchi tanlanadigan til ko'rsatiladi
+const toSelectableLanguage = (code?: string) =>
+  SELECTABLE_LANGUAGES.some((item) => item.code === code) ? code! : SELECTABLE_LANGUAGES[0].code;
 
 export function RoomSetupModal() {
   const { t, i18n } = useTranslation();
@@ -78,13 +82,13 @@ export function RoomSetupModal() {
     refetchRooms,
   } = useTablet();
   const [value, setValue] = useState<string | null>(null);
-  const [language, setLanguage] = useState<string>(i18n.resolvedLanguage ?? LANGUAGES[0].code);
+  const [language, setLanguage] = useState<string>(toSelectableLanguage(i18n.resolvedLanguage));
 
   // Oyna har ochilganda joriy xona va til bilan boshlanadi
   useEffect(() => {
     if (!roomSetupOpen) return;
     setValue(room ? String(room.id) : null);
-    setLanguage(i18n.resolvedLanguage ?? LANGUAGES[0].code);
+    setLanguage(toSelectableLanguage(i18n.resolvedLanguage));
   }, [roomSetupOpen, room, i18n.resolvedLanguage]);
 
   const options = (Array.isArray(rooms) ? rooms : []).map((item) => ({

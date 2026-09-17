@@ -4,6 +4,7 @@ import dayjs from 'dayjs';
 import { tabletApi } from '@/features/tablet/api/tablet-api';
 import { resultTimeout, toAccessEvent } from '@/features/tablet/utils/access-event';
 import { STREAM_PING_TIMEOUT, STREAM_RETRY_DELAY } from '@/shared/config/env';
+import { playAudio } from '@/shared/lib';
 import { useTablet } from '@/features/tablet/tablet-context/tablet-context';
 import type { AccessDisplay } from '@/features/tablet/types';
 
@@ -54,7 +55,10 @@ export function useAccessEvents() {
       if (lastEventId != null && display.event_id <= lastEventId) return;
 
       lastEventId = display.event_id;
-      handlers.current.handleEvent(toAccessEvent(display, room));
+      const event = toAccessEvent(display, room);
+      // Faqat jonli hodisada — sahifa qayta ochilganda tiklangan eski hodisa ovoz chiqarmaydi
+      if (event.greetingAudioUrl) playAudio(event.greetingAudioUrl);
+      handlers.current.handleEvent(event);
     };
 
     const connect = () => {
