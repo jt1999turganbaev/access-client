@@ -2,7 +2,7 @@ import type { AccessDisplay, Room } from '@/features/tablet/types';
 import { API_ROUTES } from '@/shared/constants/api-routes';
 import { DEVICE_ID_STORAGE_KEY, ROOM_STORAGE_KEY } from '@/shared/constants/local-storage';
 import { env } from '@/shared/config/env';
-import { http } from '@/shared/http';
+import { getLocale, http } from '@/shared/http';
 import { randomId, storage } from '@/shared/lib';
 import type { ResponseWithData } from '@/shared/types';
 
@@ -91,6 +91,8 @@ export const tabletApi = {
       params.set('after_event_id', String(afterEventId));
     }
     if (device) params.set('device', device);
+    // EventSource header yubora olmaydi — til query orqali beriladi
+    params.set('locale', getLocale());
     const query = params.toString() ? `?${params}` : '';
     return `${base}${API_ROUTES.ROOM_STREAM(roomId)}${query}`;
   },

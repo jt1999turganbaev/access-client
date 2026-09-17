@@ -4,7 +4,7 @@ import { LANGUAGE_STORAGE_KEY } from '@/shared/constants/local-storage';
 import { storage } from '@/shared/lib';
 import { DEFAULT_LANGUAGE, SUPPORTED_LANGUAGES, type LanguageCode } from '../languages';
 import en from './locales/en.json';
-import qq from './locales/qq.json';
+import qr from './locales/qr.json';
 import ru from './locales/ru.json';
 import uz from './locales/uz.json';
 
@@ -26,7 +26,7 @@ i18n.on('languageChanged', applyLanguage);
 
 void i18n.use(initReactI18next).init({
   resources: {
-    qq: { main: qq },
+    qr: { main: qr },
     uz: { main: uz },
     ru: { main: ru },
     en: { main: en },

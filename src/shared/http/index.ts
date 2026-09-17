@@ -1,1 +1,1 @@
-export { http } from './http';
+export { getLocale, http } from './http';

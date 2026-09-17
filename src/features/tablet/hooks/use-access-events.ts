@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import dayjs from 'dayjs';
 import { tabletApi } from '@/features/tablet/api/tablet-api';
@@ -26,6 +27,14 @@ export function useAccessEvents() {
   const handlers = useRef({ handleEvent, showResult, setConnected, clearRoom });
   handlers.current = { handleEvent, showResult, setConnected, clearRoom };
 
+  // Til o'zgarsa oqim yangi `locale` bilan qayta ochiladi
+  const { i18n } = useTranslation();
+  const language = i18n.resolvedLanguage;
+
+  // Qayta ulanishda (til o'zgarganda) shu xonaning oxirgi hodisasi eslab qolinadi —
+  // ko'rsatilgan natija qayta chiqmaydi va hech narsa o'tkazib yuborilmaydi
+  const lastEvent = useRef<{ roomId: number; id: number } | null>(null);
+
   useEffect(() => {
     if (!room) return;
 
@@ -33,8 +42,14 @@ export function useAccessEvents() {
     let source: EventSource | null = null;
     let retryTimer: number | null = null;
     let watchdog: number | null = null;
-    let lastEventId: number | null = null;
+    let lastEventId: number | null =
+      lastEvent.current?.roomId === room.id ? lastEvent.current.id : null;
     let failures = 0;
+
+    const rememberEvent = (id: number) => {
+      lastEventId = id;
+      lastEvent.current = { roomId: room.id, id };
+    };
 
     const clearTimers = () => {
       if (retryTimer) window.clearTimeout(retryTimer);
@@ -54,7 +69,7 @@ export function useAccessEvents() {
       if (typeof display?.event_id !== 'number') return;
       if (lastEventId != null && display.event_id <= lastEventId) return;
 
-      lastEventId = display.event_id;
+      rememberEvent(display.event_id);
       const event = toAccessEvent(display, room);
       // Faqat jonli hodisada — sahifa qayta ochilganda tiklangan eski hodisa ovoz chiqarmaydi
       if (event.greetingAudioUrl) playAudio(event.greetingAudioUrl);
@@ -112,8 +127,9 @@ export function useAccessEvents() {
       try {
         const latest = await tabletApi.getLatest(room.id);
         if (disposed) return;
-        if (latest) {
-          lastEventId = latest.event_id;
+        // Bu hodisa allaqachon ko'rsatilgan bo'lsa (qayta ulanish) — tiklanmaydi
+        if (latest && (lastEventId == null || latest.event_id > lastEventId)) {
+          rememberEvent(latest.event_id);
           const event = toAccessEvent(latest, room);
           const age = dayjs().diff(dayjs(latest.captured_at));
           const timeout = resultTimeout(event);
@@ -142,5 +158,5 @@ export function useAccessEvents() {
       source?.close();
       handlers.current.setConnected(false);
     };
-  }, [room, deviceId]);
+  }, [room, deviceId, language]);
 }
