@@ -13,9 +13,9 @@ export function ResultCountdown({ danger, compact }: { danger?: boolean; compact
     <div
       className={`${classes.countdown} ${danger ? classes.countdownDanger : ''} ${compact ? classes.countdownCompact : ''}`}
     >
-      {/* Yangi hodisada taymer qaytadan boshlanadi — chiziq ham boshidan chiziladi */}
+      {/* Taymer qayta qo'yilganda (yangi hodisa yoki ovoz uzunligi ma'lum bo'ldi) chiziq boshidan chiziladi */}
       <div
-        key={event?.id}
+        key={`${event?.id}-${resultDuration}`}
         className={classes.countdownFill}
         style={{ animationDuration: `${resultDuration}ms` }}
       />

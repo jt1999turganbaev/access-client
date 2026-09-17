@@ -5,8 +5,12 @@ import { useQuery } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
 import { deviceStorage, roomStorage, tabletApi } from '@/features/tablet/api/tablet-api';
 import type { AccessEvent, AccessStatus, Room, TabletState } from '@/features/tablet/types';
-import { PROCESSING_TIMEOUT, STREAM_RETRY_DELAY } from '@/shared/config/env';
-import { isExitSuccess, resultTimeout } from '@/features/tablet/utils/access-event';
+import { PROCESSING_TIMEOUT, RESULT_TIMEOUT, STREAM_RETRY_DELAY } from '@/shared/config/env';
+import {
+  greetingScreenTimeout,
+  isExitSuccess,
+  screenTimeout,
+} from '@/features/tablet/utils/access-event';
 import { QUERY_KEYS } from '@/shared/constants/query-keys';
 import { playAudio } from '@/shared/lib';
 import { ROUTES } from '@/shared/constants/routes';
@@ -87,34 +91,52 @@ export function TabletProvider({ children }: { children: ReactNode }) {
   /** Ekran ochiq turgan paytda kimga salomlashuv aytilgan — shu odam qayta tanilsa ovoz takrorlanmaydi */
   const greetedUserId = useRef<string | number | null>(null);
 
+  /** Shu odamning salomlashuv ovozi qancha davom etadi (ms) — ekran shunga qarab turadi */
+  const greetingMs = useRef<{ userId: string | number | null; ms: number } | null>(null);
+
   const reset = useCallback(() => {
     clearTimers();
     greetedUserId.current = null;
+    greetingMs.current = null;
     setState('idle');
     setEvent(null);
     navigate(ROUTES.IDLE, { replace: true });
   }, [clearTimers, navigate]);
 
+  /** Ekran shu vaqtdan keyin bosh sahifaga qaytadi; pastdagi chiziq ham shuni chizadi */
+  const scheduleReset = useCallback(
+    (duration: number) => {
+      // Buzuq qiymat (Infinity, NaN, manfiy) bilan ekran qotib qolmasligi kerak
+      const safe = Number.isFinite(duration) && duration > 0 ? Math.round(duration) : RESULT_TIMEOUT;
+      if (resultTimer.current) window.clearTimeout(resultTimer.current);
+      setResultDuration(safe);
+      resultTimer.current = window.setTimeout(reset, safe);
+    },
+    [reset],
+  );
+
+  /** Shu hodisa uchun ma'lum bo'lgan ovoz uzunligi (boshqa odamniki bo'lsa — yo'q) */
+  const audioMsFor = (next: AccessEvent) =>
+    greetingMs.current?.userId === (next.user?.id ?? null) ? greetingMs.current.ms : null;
+
   const showResult = useCallback(
     (next: AccessEvent, timeout?: number) => {
       clearTimers();
-      // Ruxsat berilganda (success) ekran avtomatik bosh sahifaga qaytmaydi —
-      // keyingi hodisa kelguncha yoki reset() chaqirilguncha turadi
-      // Chiqishdagi success esa vaqt tugagach qaytadi
-      const autoReset = next.status !== 'granted' || isExitSuccess(next);
-      const duration = autoReset ? (timeout ?? resultTimeout(next)) : 0;
+      // Kirishdagi success salomlashuv ovoziga qarab, qolgan ekranlar belgilangan vaqtga qarab qaytadi
+      const duration = timeout ?? screenTimeout(next, audioMsFor(next));
       setEvent(next);
-      setResultDuration(duration);
       setState(stateByStatus[next.status]);
       navigate(routeByStatus[next.status], { replace: true });
-      if (autoReset) resultTimer.current = window.setTimeout(reset, duration);
+      scheduleReset(duration);
     },
-    [clearTimers, navigate, reset],
+    [clearTimers, navigate, scheduleReset],
   );
 
-  // handleEvent qayta yaratilmasligi uchun joriy holat ref'da
+  // handleEvent qayta yaratilmasligi uchun joriy holat va hodisa ref'da
   const stateRef = useRef(state);
   stateRef.current = state;
+  const eventRef = useRef(event);
+  eventRef.current = event;
 
   const handleEvent = useCallback(
     (next: AccessEvent) => {
@@ -125,10 +147,20 @@ export function TabletProvider({ children }: { children: ReactNode }) {
         !!next.greetingAudioUrl && (userId == null || userId !== greetedUserId.current);
       greetedUserId.current = userId;
       if (shouldGreet && next.greetingAudioUrl) {
+        greetingMs.current = null;
         playAudio(next.greetingAudioUrl, {
           // Ovoz chiqmagan bo'lsa, shu odam qayta tanilganda yana urinib ko'riladi
           onFail: () => {
             if (greetedUserId.current === userId) greetedUserId.current = null;
+          },
+          // Uzunlik ekran ochilgandan keyin ma'lum bo'lsa, vaqt shunga moslanadi
+          onDuration: (seconds) => {
+            if (!Number.isFinite(seconds) || seconds <= 0) return;
+            greetingMs.current = { userId, ms: Math.round(seconds * 1000) };
+            const shown = eventRef.current;
+            if (stateRef.current !== 'success' || !shown || isExitSuccess(shown)) return;
+            if ((shown.user?.id ?? null) !== userId) return;
+            scheduleReset(greetingScreenTimeout(shown, greetingMs.current.ms));
           },
         });
       }
@@ -146,7 +178,7 @@ export function TabletProvider({ children }: { children: ReactNode }) {
       navigate(ROUTES.PROCESSING, { replace: true });
       processingTimer.current = window.setTimeout(() => showResult(next), PROCESSING_TIMEOUT);
     },
-    [clearTimers, navigate, showResult],
+    [clearTimers, navigate, scheduleReset, showResult],
   );
 
   const saveRoom = useCallback(

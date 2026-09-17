@@ -22,6 +22,11 @@ function stop(audio: HTMLAudioElement) {
 interface PlayAudioOptions {
   /** Ovoz umuman ijro etilmadi (bloklandi, yuklanmadi, kechikdi) */
   onFail?: () => void;
+  /**
+   * Ovozning aniq uzunligi ma'lum bo'ldi (soniya). Fayl oqim sifatida kelsa yoki
+   * uzunligi ko'rsatilmasa umuman chaqirilmaydi.
+   */
+  onDuration?: (seconds: number) => void;
 }
 
 /**
@@ -33,7 +38,7 @@ interface PlayAudioOptions {
  * - Fayl yuklanmasa (tarmoq, 502/504) — bir marta qayta urinadi.
  * - START_TIMEOUT ichida boshlanmasa — bekor qilinadi.
  */
-export function playAudio(url: string, { onFail }: PlayAudioOptions = {}) {
+export function playAudio(url: string, { onFail, onDuration }: PlayAudioOptions = {}) {
   if (current) {
     stop(current);
     current = null;
@@ -88,6 +93,11 @@ export function playAudio(url: string, { onFail }: PlayAudioOptions = {}) {
       );
     });
   };
+
+  audio.addEventListener('loadedmetadata', () => {
+    if (!isCurrent()) return;
+    if (Number.isFinite(audio.duration) && audio.duration > 0) onDuration?.(audio.duration);
+  });
 
   audio.addEventListener('playing', () => {
     started = true;

@@ -1,5 +1,7 @@
 import {
   EXIT_SUCCESS_TIMEOUT,
+  GREETING_MAX_AUDIO,
+  GREETING_TAIL_TIMEOUT,
   NOT_FOUND_TIMEOUT,
   READING_MS_PER_WORD,
   RESULT_TIMEOUT,
@@ -8,6 +10,41 @@ import {
 } from '@/shared/config/env';
 import type { AccessDisplay, AccessEvent, Room } from '@/features/tablet/types';
 import { i18n } from '@/shared/config/i18n';
+
+/**
+ * Kirishdagi success ekrani qancha turadi.
+ *
+ * Salomlashuv ovozining aniq uzunligi ma'lum bo'lsa — shunga qarab.
+ * Ma'lum bo'lmasa — salomlashuv va vazifani aytishga yetadigan taxminiy vaqtga qarab.
+ * Har qanday holatda kamida RESULT_TIMEOUT, ustiga GREETING_TAIL_TIMEOUT qo'shiladi.
+ */
+export function greetingScreenTimeout(
+  event: Pick<AccessEvent, 'status' | 'user' | 'direction'>,
+  audioMs?: number | null,
+) {
+  // `Infinity`, `NaN`, manfiy yoki haddan ziyod katta qiymat — ishonchsiz, taxminiy vaqtga tushamiz
+  const known =
+    typeof audioMs === 'number' &&
+    Number.isFinite(audioMs) &&
+    audioMs > 0 &&
+    audioMs <= GREETING_MAX_AUDIO;
+  const base = known ? audioMs : resultTimeout(event);
+  // Zaxira vaqt ham buzuq bo'lib qolmasin
+  const safeBase = Number.isFinite(base) && base > 0 ? base : RESULT_TIMEOUT;
+  return Math.round(Math.max(safeBase, RESULT_TIMEOUT) + GREETING_TAIL_TIMEOUT);
+}
+
+/**
+ * Ekran (har qanday natija) qancha turadi.
+ * Kirishdagi success salomlashuvga qarab, qolganlari belgilangan vaqtga qarab.
+ */
+export function screenTimeout(
+  event: Pick<AccessEvent, 'status' | 'user' | 'direction'>,
+  audioMs?: number | null,
+) {
+  const isEntrySuccess = event.status === 'granted' && !isExitSuccess(event);
+  return isEntrySuccess ? greetingScreenTimeout(event, audioMs) : resultTimeout(event);
+}
 
 /** Chiqishda ruxsat — success ekrani ham vaqt tugagach bosh sahifaga qaytadi */
 export const isExitSuccess = (event: Pick<AccessEvent, 'status' | 'direction'>) =>

@@ -6,6 +6,13 @@ export const env = {
 
 /** Success va denied ekranlari shu vaqtdan keyin bosh sahifaga qaytadi (ms) */
 export const RESULT_TIMEOUT = 10_000;
+/** Kirishdagi success ekrani salomlashuv tugagandan keyin shuncha turadi (ms) */
+export const GREETING_TAIL_TIMEOUT = 3_000;
+/**
+ * Ovoz uzunligi shundan oshsa — ishonchsiz deb hisoblanadi (ms). Salomlashuv
+ * bir daqiqadan uzun bo'lmaydi; buzuq metadata tufayli ekran qotib qolmasligi kerak.
+ */
+export const GREETING_MAX_AUDIO = 60_000;
 /** Chiqishda success ekrani shu vaqtdan keyin bosh sahifaga qaytadi (ms) */
 export const EXIT_SUCCESS_TIMEOUT = 10_000;
 /** Foydalanuvchi topilmadi ekrani — ko'rsatadigan ma'lumot kam, tezroq qaytadi (ms) */
