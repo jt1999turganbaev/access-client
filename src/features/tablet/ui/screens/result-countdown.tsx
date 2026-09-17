@@ -6,7 +6,7 @@ import classes from './screens.module.css';
  * Vaqt CSS animatsiyasi bilan chiziladi — har soniyada qayta render bo'lmaydi.
  */
 export function ResultCountdown({ danger, compact }: { danger?: boolean; compact?: boolean }) {
-  const { resultDuration, event } = useTablet();
+  const { resultDuration, resultStartedAt } = useTablet();
   if (!resultDuration) return null;
 
   return (
@@ -15,7 +15,7 @@ export function ResultCountdown({ danger, compact }: { danger?: boolean; compact
     >
       {/* Taymer qayta qo'yilganda (yangi hodisa yoki ovoz uzunligi ma'lum bo'ldi) chiziq boshidan chiziladi */}
       <div
-        key={`${event?.id}-${resultDuration}`}
+        key={resultStartedAt}
         className={classes.countdownFill}
         style={{ animationDuration: `${resultDuration}ms` }}
       />

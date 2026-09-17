@@ -38,6 +38,8 @@ export function TabletProvider({ children }: { children: ReactNode }) {
   const [state, setState] = useState<TabletState>('idle');
   /** Joriy natija ekrani necha ms turadi — pastdagi hisoblagich chizig'i shuni chizadi */
   const [resultDuration, setResultDuration] = useState(0);
+  /** Taymer oxirgi marta qo'yilgan payt — hisoblagich chizig'i shundan qayta chiziladi */
+  const [resultStartedAt, setResultStartedAt] = useState(0);
   const [event, setEvent] = useState<AccessEvent | null>(null);
 
   const processingTimer = useRef<number | null>(null);
@@ -110,6 +112,7 @@ export function TabletProvider({ children }: { children: ReactNode }) {
       const safe = Number.isFinite(duration) && duration > 0 ? Math.round(duration) : RESULT_TIMEOUT;
       if (resultTimer.current) window.clearTimeout(resultTimer.current);
       setResultDuration(safe);
+      setResultStartedAt(Date.now());
       resultTimer.current = window.setTimeout(reset, safe);
     },
     [reset],
@@ -227,6 +230,7 @@ export function TabletProvider({ children }: { children: ReactNode }) {
       state,
       event,
       resultDuration,
+      resultStartedAt,
       handleEvent,
       showResult,
       reset,
@@ -247,6 +251,7 @@ export function TabletProvider({ children }: { children: ReactNode }) {
       state,
       event,
       resultDuration,
+      resultStartedAt,
       handleEvent,
       showResult,
       reset,

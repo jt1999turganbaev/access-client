@@ -29,6 +29,8 @@ export interface TabletContextValue {
   event: AccessEvent | null;
   /** Joriy natija ekrani necha ms turadi (hisoblagich chizig'i uchun) */
   resultDuration: number;
+  /** Taymer oxirgi marta qachon qo'yildi — chiziq qayta chizilishi uchun */
+  resultStartedAt: number;
   /** Yangi event: qisqa PROCESSING, so'ng natija */
   handleEvent: (event: AccessEvent) => void;
   /** Natijani darhol ko'rsatish (masalan, qayta ulanganda tiklash) */

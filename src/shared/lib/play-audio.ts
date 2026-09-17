@@ -94,14 +94,26 @@ export function playAudio(url: string, { onFail, onDuration }: PlayAudioOptions 
     });
   };
 
+  // Uzunlik faqat ovoz haqiqatan boshlanganda beriladi — bloklangan ovoz uchun
+  // ekran jim turib qolmasligi kerak
+  let durationSeconds: number | null = null;
+  const emitDuration = () => {
+    if (!isCurrent() || !started || durationSeconds == null) return;
+    const seconds = durationSeconds;
+    durationSeconds = null;
+    onDuration?.(seconds);
+  };
+
   audio.addEventListener('loadedmetadata', () => {
     if (!isCurrent()) return;
-    if (Number.isFinite(audio.duration) && audio.duration > 0) onDuration?.(audio.duration);
+    if (Number.isFinite(audio.duration) && audio.duration > 0) durationSeconds = audio.duration;
+    emitDuration();
   });
 
   audio.addEventListener('playing', () => {
     started = true;
     cleanup();
+    emitDuration();
   });
 
   audio.addEventListener('ended', () => {
