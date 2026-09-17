@@ -46,7 +46,7 @@ export function SuccessScreen() {
       )}
 
       {hasTasks && <TaskCard tasks={user.tasks} />}
-      <ResultCountdown />
+      <ResultCountdown compact />
     </div>
   );
 }

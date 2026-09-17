@@ -1,4 +1,5 @@
 import {
+  EXIT_SUCCESS_TIMEOUT,
   NOT_FOUND_TIMEOUT,
   READING_MS_PER_WORD,
   RESULT_TIMEOUT,
@@ -8,13 +9,18 @@ import {
 import type { AccessDisplay, AccessEvent, Room } from '@/features/tablet/types';
 import { i18n } from '@/shared/config/i18n';
 
+/** Chiqishda ruxsat — success ekrani ham vaqt tugagach bosh sahifaga qaytadi */
+export const isExitSuccess = (event: Pick<AccessEvent, 'status' | 'direction'>) =>
+  event.status === 'granted' && event.direction === 'out';
+
 /**
  * Natija ekrani qancha turadi.
  * Vazifa matni uzun bo'lsa vaqt o'qishga yetadigan darajada uzayadi,
  * lekin RESULT_TIMEOUT_MAX dan oshmaydi.
  */
-export function resultTimeout(event: Pick<AccessEvent, 'status' | 'user'>) {
+export function resultTimeout(event: Pick<AccessEvent, 'status' | 'user' | 'direction'>) {
   if (event.status === 'not_found') return NOT_FOUND_TIMEOUT;
+  if (isExitSuccess(event)) return EXIT_SUCCESS_TIMEOUT;
 
   const text = (event.user?.tasks ?? [])
     .map((task) => `${task.title ?? ''} ${task.description ?? ''}`)
@@ -65,6 +71,7 @@ export function toAccessEvent(display: AccessDisplay, room: Room | null): Access
     id: typeof display.event_id === 'number' ? display.event_id : 0,
     status,
     occurredAt: text(display.captured_at) ?? new Date().toISOString(),
+    direction: display.direction === 'in' || display.direction === 'out' ? display.direction : null,
     greetingAudioUrl: resolveMediaUrl(text(display.greeting_audio_url)),
     user: user
       ? {

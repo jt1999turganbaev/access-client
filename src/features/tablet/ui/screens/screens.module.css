@@ -234,6 +234,14 @@
   animation-fill-mode: forwards;
 }
 
+/* SUCCESS: ekran tagida emas, kontent ostida — qisqa chiziq */
+.countdownCompact {
+  margin-top: 2rem;
+  align-self: center;
+  width: 24rem;
+  max-width: 100%;
+}
+
 .countdownDanger .countdownFill {
   background: linear-gradient(90deg, #f6a6a6, #e15b5b);
 }

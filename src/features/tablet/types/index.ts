@@ -59,5 +59,7 @@ export interface AccessEvent {
   user?: RecognizedUser | null;
   /** ISO datetime */
   occurredAt: string;
+  /** Kirish yoki chiqish terminali */
+  direction: TerminalDirection | null;
   greetingAudioUrl: string | null;
 }

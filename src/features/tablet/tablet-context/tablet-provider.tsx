@@ -6,8 +6,9 @@ import { useTranslation } from 'react-i18next';
 import { deviceStorage, roomStorage, tabletApi } from '@/features/tablet/api/tablet-api';
 import type { AccessEvent, AccessStatus, Room, TabletState } from '@/features/tablet/types';
 import { PROCESSING_TIMEOUT, STREAM_RETRY_DELAY } from '@/shared/config/env';
-import { resultTimeout } from '@/features/tablet/utils/access-event';
+import { isExitSuccess, resultTimeout } from '@/features/tablet/utils/access-event';
 import { QUERY_KEYS } from '@/shared/constants/query-keys';
+import { playAudio } from '@/shared/lib';
 import { ROUTES } from '@/shared/constants/routes';
 import { TabletContext, type TabletContextValue } from './tablet-context';
 
@@ -83,8 +84,12 @@ export function TabletProvider({ children }: { children: ReactNode }) {
     resultTimer.current = null;
   }, []);
 
+  /** Ekran ochiq turgan paytda kimga salomlashuv aytilgan — shu odam qayta tanilsa ovoz takrorlanmaydi */
+  const greetedUserId = useRef<string | number | null>(null);
+
   const reset = useCallback(() => {
     clearTimers();
+    greetedUserId.current = null;
     setState('idle');
     setEvent(null);
     navigate(ROUTES.IDLE, { replace: true });
@@ -95,7 +100,8 @@ export function TabletProvider({ children }: { children: ReactNode }) {
       clearTimers();
       // Ruxsat berilganda (success) ekran avtomatik bosh sahifaga qaytmaydi —
       // keyingi hodisa kelguncha yoki reset() chaqirilguncha turadi
-      const autoReset = next.status !== 'granted';
+      // Chiqishdagi success esa vaqt tugagach qaytadi
+      const autoReset = next.status !== 'granted' || isExitSuccess(next);
       const duration = autoReset ? (timeout ?? resultTimeout(next)) : 0;
       setEvent(next);
       setResultDuration(duration);
@@ -112,6 +118,21 @@ export function TabletProvider({ children }: { children: ReactNode }) {
 
   const handleEvent = useCallback(
     (next: AccessEvent) => {
+      // Ovoz faqat odam almashganda yoki ekran bosh sahifaga qaytgandan keyin ijro etiladi —
+      // bir odam turib qolib qayta-qayta tanilsa, salomlashuv takrorlanmaydi
+      const userId = next.user?.id ?? null;
+      const shouldGreet =
+        !!next.greetingAudioUrl && (userId == null || userId !== greetedUserId.current);
+      greetedUserId.current = userId;
+      if (shouldGreet && next.greetingAudioUrl) {
+        playAudio(next.greetingAudioUrl, {
+          // Ovoz chiqmagan bo'lsa, shu odam qayta tanilganda yana urinib ko'riladi
+          onFail: () => {
+            if (greetedUserId.current === userId) greetedUserId.current = null;
+          },
+        });
+      }
+
       // Natija ekrani ochiq bo'lsa (success ekran o'zi yopilmaydi) — yangi natija loadersiz
       // darhol almashadi, har bir hodisada loader qayta-qayta chiqmaydi
       const current = stateRef.current;

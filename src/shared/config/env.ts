@@ -6,6 +6,8 @@ export const env = {
 
 /** Success va denied ekranlari shu vaqtdan keyin bosh sahifaga qaytadi (ms) */
 export const RESULT_TIMEOUT = 10_000;
+/** Chiqishda success ekrani shu vaqtdan keyin bosh sahifaga qaytadi (ms) */
+export const EXIT_SUCCESS_TIMEOUT = 10_000;
 /** Foydalanuvchi topilmadi ekrani — ko'rsatadigan ma'lumot kam, tezroq qaytadi (ms) */
 export const NOT_FOUND_TIMEOUT = 5_000;
 /**
