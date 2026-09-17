@@ -3,6 +3,7 @@ import { useAccessEvents } from '@/features/tablet/hooks/use-access-events';
 import { TabletProvider } from '@/features/tablet/tablet-context/tablet-provider';
 import { KioskLayout } from '@/shared/layouts/kiosk-layout/main/kiosk-layout';
 import { RoomSetupModal } from './room-setup-modal/room-setup-modal';
+import { SettingsButton } from './settings-button/settings-button';
 
 /** SSE tinglovchisi `TabletProvider` ichida bo'lishi shart — alohida komponent. */
 function AccessEventsListener() {
@@ -20,6 +21,7 @@ export function TabletRoot() {
       <AccessEventsListener />
       <KioskLayout>
         <Outlet />
+        <SettingsButton />
         <RoomSetupModal />
       </KioskLayout>
     </TabletProvider>

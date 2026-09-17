@@ -3,7 +3,13 @@ import type { ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { deviceStorage, roomStorage, tabletApi } from '@/features/tablet/api/tablet-api';
-import type { AccessEvent, AccessStatus, Room, TabletState } from '@/features/tablet/types';
+import type {
+  AccessEvent,
+  AccessStatus,
+  Room,
+  SettingsMode,
+  TabletState,
+} from '@/features/tablet/types';
 import { PROCESSING_TIMEOUT, STREAM_RETRY_DELAY } from '@/shared/config/env';
 import { resultTimeout } from '@/features/tablet/utils/access-event';
 import { QUERY_KEYS } from '@/shared/constants/query-keys';
@@ -28,6 +34,7 @@ export function TabletProvider({ children }: { children: ReactNode }) {
   const [room, setRoom] = useState<Room | null>(() => roomStorage.get());
   const [deviceId, setDeviceId] = useState<string>(() => deviceStorage.get());
   const [roomSetupOpen, setRoomSetupOpen] = useState(false);
+  const [settingsMode, setSettingsMode] = useState<SettingsMode>('full');
   const [streamConnected, setConnected] = useState(false);
   const [state, setState] = useState<TabletState>('idle');
   /** Joriy natija ekrani necha ms turadi — pastdagi hisoblagich chizig'i shuni chizadi */
@@ -43,7 +50,8 @@ export function TabletProvider({ children }: { children: ReactNode }) {
   const roomsQuery = useQuery({
     queryKey: [QUERY_KEYS.ROOMS],
     queryFn: tabletApi.getRooms,
-    enabled: needsRoomSetup || roomSetupOpen,
+    // Faqat til o'zgartiriladigan oyna uchun xonalar ro'yxati kerak emas
+    enabled: needsRoomSetup || (roomSetupOpen && settingsMode === 'full'),
     retry: needsRoomSetup ? true : 1,
     retryDelay: STREAM_RETRY_DELAY,
   });
@@ -122,11 +130,16 @@ export function TabletProvider({ children }: { children: ReactNode }) {
       needsRoomSetup,
       // Xona yo'q: server xonalar ro'yxatini bergan zahoti ochiladi va tanlanmaguncha yopilmaydi
       roomSetupOpen: needsRoomSetup ? roomsLoaded : roomSetupOpen,
+      // Xona tanlanmagan bo'lsa oyna doim to'liq ko'rinishda
+      settingsMode: needsRoomSetup ? 'full' : settingsMode,
       rooms: roomsQuery.data ?? [],
       roomsLoading: roomsQuery.isLoading,
       roomsError: roomsQuery.isError,
       refetchRooms: () => void roomsQuery.refetch(),
-      openRoomSetup: () => setRoomSetupOpen(true),
+      openRoomSetup: (mode = 'full') => {
+        setSettingsMode(mode);
+        setRoomSetupOpen(true);
+      },
       closeRoomSetup: () => {
         if (!needsRoomSetup) setRoomSetupOpen(false);
       },
@@ -146,6 +159,7 @@ export function TabletProvider({ children }: { children: ReactNode }) {
       room,
       needsRoomSetup,
       roomSetupOpen,
+      settingsMode,
       roomsLoaded,
       roomsQuery.data,
       roomsQuery.isLoading,

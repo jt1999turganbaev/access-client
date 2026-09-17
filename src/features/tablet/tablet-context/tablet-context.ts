@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react';
-import type { AccessEvent, Room, TabletState } from '@/features/tablet/types';
+import type { AccessEvent, Room, SettingsMode, TabletState } from '@/features/tablet/types';
 
 export interface TabletContextValue {
   /** Planshetga biriktirilgan xona */
@@ -8,12 +8,14 @@ export interface TabletContextValue {
   needsRoomSetup: boolean;
   /** Modal ochiqmi. Xona tanlanmagan bo'lsa — server javob berishi bilan avtomatik ochiladi */
   roomSetupOpen: boolean;
+  /** `full` — xona va til (bosh ekranda), `language` — faqat til (boshqa ekranlarda) */
+  settingsMode: SettingsMode;
   /** GET /rooms/list */
   rooms: Room[];
   roomsLoading: boolean;
   roomsError: boolean;
   refetchRooms: () => void;
-  openRoomSetup: () => void;
+  openRoomSetup: (mode?: SettingsMode) => void;
   closeRoomSetup: () => void;
   saveRoom: (room: Room, deviceId?: string) => void;
   /** Xona serverda topilmasa — biriktirishni bekor qilib, tanlash oynasini ochadi */

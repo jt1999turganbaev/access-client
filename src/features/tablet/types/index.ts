@@ -23,6 +23,8 @@ export interface AccessDisplay {
 
 /* ---------- Klient (UI) ---------- */
 
+export type SettingsMode = 'full' | 'language';
+
 export type TabletState = 'idle' | 'processing' | 'success' | 'denied' | 'not-found';
 
 export interface TaskItem {

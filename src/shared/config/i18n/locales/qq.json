@@ -37,7 +37,7 @@
     "roomAccent": "identifikaciyadan ótiń",
     "title": "Kiriw sisteması",
     "accent": "tayın",
-    "online": "Júzdi tanıw sisteması belsendi",
+    "online": "Júzdi tanıw sisteması aktiv",
     "offline": "Server menen baylanıs tiklenbekte..."
   },
   "processing": {
@@ -88,6 +88,8 @@
     "noRooms": "Serverde belsendi bólme tabılmadı. Administrator bólme qosqannan soń, “Qayta urınıw”dı basıń.",
     "loadError": "Bólmeler dizimin alıp bolmadı",
     "room": "Bólme",
-    "placeholder": "Bólmeni saylań"
+    "placeholder": "Bólmeni saylań",
+    "titleLanguage": "Tildi ózgertiw",
+    "textLanguage": "Planshet interfeysi tilin saylap, saqlań."
   }
 }
