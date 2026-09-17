@@ -79,6 +79,19 @@
   color: #8e9fc0;
 }
 
+/* Siluet o'rniga berilgan ikonka — markazda */
+.placeholderCustom {
+  background: linear-gradient(180deg, #fff5f5 0%, #ffe6e6 100%);
+  color: #ef4444;
+}
+
+.placeholderCustom > svg {
+  display: block;
+  width: 46%;
+  height: 46%;
+  shape-rendering: geometricPrecision;
+}
+
 .badge {
   position: absolute;
   right: 0.1rem;

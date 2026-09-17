@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import type { ReactNode } from 'react';
 import { IconCheck, IconUserFilled, IconX } from '@tabler/icons-react';
 import classes from './status-avatar.module.css';
 
@@ -7,9 +8,11 @@ interface Props {
   photoUrl?: string | null;
   /** Diametr, rem */
   size?: number;
+  /** Siluet o'rniga ko'rsatiladigan ikonka (masalan, xato ekranida) */
+  icon?: ReactNode;
 }
 
-export function StatusAvatar({ status, photoUrl, size = 19 }: Props) {
+export function StatusAvatar({ status, photoUrl, size = 19, icon }: Props) {
   const isSuccess = status === 'success';
   // Rasm manzili buzuq bo'lsa yoki yuklanmasa — siluet ko'rsatiladi
   const [photoFailed, setPhotoFailed] = useState(false);
@@ -31,8 +34,8 @@ export function StatusAvatar({ status, photoUrl, size = 19 }: Props) {
             onError={() => setPhotoFailed(true)}
           />
         ) : (
-          <div className={classes.placeholder}>
-            <IconUserFilled className={classes.placeholderIcon} />
+          <div className={`${classes.placeholder} ${icon ? classes.placeholderCustom : ''}`}>
+            {icon ?? <IconUserFilled className={classes.placeholderIcon} />}
           </div>
         )}
       </div>

@@ -183,24 +183,6 @@
   height: 2rem;
 }
 
-.errorIconWrap {
-  width: 15rem;
-  height: 15rem;
-  border-radius: 50%;
-  background: radial-gradient(circle, #fff1f1 40%, #fff7f7 100%);
-  border: 0.3rem solid #ffd9d9;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #ef4444;
-}
-
-.errorIcon {
-  width: 46%;
-  height: 46%;
-  shape-rendering: geometricPrecision;
-}
-
 .errorDetail {
   max-width: 44rem;
   margin: 0 auto;

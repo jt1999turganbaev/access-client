@@ -4,6 +4,7 @@ import axios from 'axios';
 import dayjs from 'dayjs';
 import { tabletApi } from '@/features/tablet/api/tablet-api';
 import { resultTimeout, toAccessEvent } from '@/features/tablet/utils/access-event';
+import { logAccessEvent } from '@/features/tablet/utils/access-debug-log';
 import { STREAM_PING_TIMEOUT, STREAM_RETRY_DELAY } from '@/shared/config/env';
 import { useTablet } from '@/features/tablet/tablet-context/tablet-context';
 import type { AccessDisplay } from '@/features/tablet/types';
@@ -69,6 +70,7 @@ export function useAccessEvents() {
       if (lastEventId != null && display.event_id <= lastEventId) return;
 
       rememberEvent(display.event_id);
+      logAccessEvent('sse', display);
       // Ovoz handleEvent ichida ijro etiladi — faqat jonli hodisada,
       // sahifa qayta ochilganda tiklangan eski hodisa ovoz chiqarmaydi
       handlers.current.handleEvent(toAccessEvent(display, room));
@@ -128,6 +130,7 @@ export function useAccessEvents() {
         // Bu hodisa allaqachon ko'rsatilgan bo'lsa (qayta ulanish) — tiklanmaydi
         if (latest && (lastEventId == null || latest.event_id > lastEventId)) {
           rememberEvent(latest.event_id);
+          logAccessEvent('latest', latest);
           const event = toAccessEvent(latest, room);
           const age = dayjs().diff(dayjs(latest.captured_at));
           const timeout = resultTimeout(event);

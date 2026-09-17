@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@mantine/core';
 import { IconAlertTriangle, IconRefresh } from '@tabler/icons-react';
-import { StatusHeading } from '@/shared/ui';
+import { StatusAvatar, StatusHeading } from '@/shared/ui';
 import { ERROR_TIMEOUT } from '@/shared/config/env';
 import { ROUTES } from '@/shared/constants/routes';
 import classes from './screens.module.css';
@@ -30,10 +30,9 @@ export function ErrorScreen({ detail, onRetry }: Props) {
 
   return (
     <div className={classes.result}>
+      {/* Boshqa natija ekranlari (denied, not found) bilan bir xil avatar */}
       <div className={classes.avatarRow}>
-        <div className={classes.errorIconWrap}>
-          <IconAlertTriangle className={classes.errorIcon} stroke={1.8} />
-        </div>
+        <StatusAvatar status="danger" size={15} icon={<IconAlertTriangle stroke={1.8} />} />
       </div>
 
       <StatusHeading
@@ -57,6 +56,11 @@ export function ErrorScreen({ detail, onRetry }: Props) {
         >
           {t('common.retry')}
         </Button>
+      </div>
+
+      {/* Planshet kontekstisiz ishlaydi — ResultCountdown o'rniga shu yerda chiziladi */}
+      <div className={`${classes.countdown} ${classes.countdownDanger}`}>
+        <div className={classes.countdownFill} style={{ animationDuration: `${ERROR_TIMEOUT}ms` }} />
       </div>
     </div>
   );
