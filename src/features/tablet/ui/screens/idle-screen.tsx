@@ -9,7 +9,7 @@ export function IdleScreen() {
 
   return (
     <div className={`${classes.center} ${classes.idle}`}>
-      <IdentityCircle size={20} iconSize={8.5} />
+      <IdentityCircle size={17} />
 
       {room?.number ? (
         // Xona tanlangan bo'lsa, sarlavhada o'sha xona raqami va nomi ko'rinadi

@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { Navigate } from 'react-router-dom';
+import { IconShieldCheck } from '@tabler/icons-react';
 import { StatusAvatar } from '@/shared/ui';
 import { TaskCard } from '../info-card/task-card';
 import { useTablet } from '@/features/tablet/tablet-context/tablet-context';
@@ -15,29 +16,36 @@ export function SuccessScreen() {
 
   if (!user || event?.status !== 'granted') return <Navigate to={ROUTES.IDLE} replace />;
 
-  // Hurmatli mehmon: rasm yo'q, "Hurmatli" deb murojaat, vazifa kartasi faqat vazifa bo'lsa
-  const { isTop } = user;
-  // TaskCard ham faqat matni bor vazifalarni ko'rsatadi
-  const hasTasks = (user.tasks ?? []).some((task) => task?.description);
+  // "Hurmatli" deb murojaat, vazifa kartasi faqat vazifa bo'lsa.
+  // TaskCard ham faqat matni bor vazifalarni ko'rsatadi.
+  // Nazoratchiga vazifa o'rniga uning roli ko'rsatiladi
+  const isSupervisor = user.role === 'nazoratchi';
+  const hasTasks = !isSupervisor && (user.tasks ?? []).some((task) => task?.description);
 
   return (
-    <div className={`${classes.result} ${isTop && !hasTasks ? classes.resultCentered : ''}`}>
-      {!isTop && (
-        <div className={classes.avatarRow}>
-          <StatusAvatar status="success" photoUrl={user.photoUrl} size={11} />
-        </div>
-      )}
+    <div className={`${classes.result} ${hasTasks ? '' : classes.resultCentered}`}>
+      <div className={classes.avatarRow}>
+        <StatusAvatar status="success" photoUrl={user.photoUrl} size={11} />
+      </div>
 
-      <div className={`${classes.welcome} ${isTop ? classes.welcomeTop : ''}`}>
+      <div className={classes.welcome}>
         {station && <div className={classes.station}>{t('idle.station', { number: station })}</div>}
         <div className={classes.welcomeText}>
-          {t('success.welcome')}
-          {isTop && ` ${t('success.honorific')}`}
+          {t('success.welcome')} {t('success.honorific')}
         </div>
         <h1 className={classes.welcomeName}>{user.fullName}!</h1>
       </div>
 
-      {(!isTop || hasTasks) && <TaskCard tasks={user.tasks} />}
+      {isSupervisor && (
+        <div className={classes.roleRow}>
+          <div className={classes.role}>
+            <IconShieldCheck className={classes.roleIcon} stroke={1.8} />
+            {t('success.supervisor')}
+          </div>
+        </div>
+      )}
+
+      {hasTasks && <TaskCard tasks={user.tasks} />}
       <ResultCountdown />
     </div>
   );

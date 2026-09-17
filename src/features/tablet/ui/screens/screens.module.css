@@ -43,7 +43,7 @@
   padding-top: 1rem;
 }
 
-/* SUCCESS (hurmatli mehmon, vazifasiz): faqat salomlashuv — markazda */
+/* SUCCESS (vazifasiz): avatar va salomlashuv — markazda */
 .resultCentered {
   justify-content: center;
   padding-bottom: 6rem;
@@ -67,11 +67,6 @@
   color: #6b83b0;
 }
 
-/* Hurmatli mehmon: avatar yo'q — stansiya va salomlashuv tepaga yopishmasin */
-.welcomeTop {
-  margin-top: 4rem;
-}
-
 .welcomeName {
   margin: 0.4rem 0 0;
   font-size: 3rem;
@@ -90,6 +85,35 @@
     opacity: 1;
     transform: none;
   }
+}
+
+/* SUCCESS: nazoratchi — F.I.Sh. ostida ixcham, yumshoq rangli rol belgisi */
+.roleRow {
+  flex: none;
+  display: flex;
+  justify-content: center;
+  margin-top: -1.4rem;
+  animation: fade 420ms ease both;
+}
+
+.role {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.7rem 1.6rem;
+  border-radius: 999px;
+  background: #f1f6fd;
+  border: 1px solid #dde8f7;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #3d5f99;
+}
+
+.roleIcon {
+  flex: none;
+  width: 1.8rem;
+  height: 1.8rem;
+  color: var(--ac-blue-soft);
 }
 
 .avatarRow {

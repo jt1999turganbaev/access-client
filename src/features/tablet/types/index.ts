@@ -11,14 +11,16 @@ export interface Room {
 
 export type TerminalDirection = 'in' | 'out';
 
+/** Foydalanuvchi roli — `nazoratchi` ga vazifa ko'rsatilmaydi */
+export type UserRole = 'admin' | 'nazoratchi' | 'user';
+
 /** GET /rooms/{id}/latest va SSE `access` hodisasi */
 export interface AccessDisplay {
   event_id: number;
   captured_at: string;
   direction: TerminalDirection | null;
   granted: boolean;
-  /** `is_top` — hurmatli mehmon: rasm ko'rsatilmaydi, "Hurmatli" deb murojaat qilinadi */
-  user: { id: number; full_name: string; photo: string | null; is_top?: boolean } | null;
+  user: { id: number; full_name: string; photo: string | null; role?: UserRole | null } | null;
   /** Terminal tanimagan bo'lsa ham ismi kelishi mumkin */
   reported_name: string | null;
   task: { id: number; name: string; description: string | null } | null;
@@ -42,8 +44,7 @@ export interface RecognizedUser {
   /** Backend hozircha bermaydi — bo'lmasa card'da ko'rsatilmaydi */
   position?: string | null;
   photoUrl?: string | null;
-  /** Hurmatli mehmon */
-  isTop: boolean;
+  role: UserRole | null;
   room: string;
   terminal: string;
   tasks: TaskItem[];

@@ -48,7 +48,8 @@
   },
   "success": {
     "welcome": "Welcome,",
-    "honorific": "Dear"
+    "honorific": "Dear",
+    "supervisor": "Supervisor"
   },
   "denied": {
     "title": "Access",

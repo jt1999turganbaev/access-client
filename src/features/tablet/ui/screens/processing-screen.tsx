@@ -7,7 +7,7 @@ export function ProcessingScreen() {
 
   return (
     <div className={classes.center}>
-      <IdentityCircle size={28} scanning />
+      <IdentityCircle size={17} scanning />
       <StatusHeading
         title={t('processing.title')}
         accent={t('processing.accent')}

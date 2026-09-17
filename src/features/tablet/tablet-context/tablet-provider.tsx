@@ -106,8 +106,19 @@ export function TabletProvider({ children }: { children: ReactNode }) {
     [clearTimers, navigate, reset],
   );
 
+  // handleEvent qayta yaratilmasligi uchun joriy holat ref'da
+  const stateRef = useRef(state);
+  stateRef.current = state;
+
   const handleEvent = useCallback(
     (next: AccessEvent) => {
+      // Natija ekrani ochiq bo'lsa (success ekran o'zi yopilmaydi) — yangi natija loadersiz
+      // darhol almashadi, har bir hodisada loader qayta-qayta chiqmaydi
+      const current = stateRef.current;
+      if (current !== 'idle' && current !== 'processing') {
+        showResult(next);
+        return;
+      }
       clearTimers();
       setState('processing');
       setEvent(null);

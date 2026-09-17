@@ -48,7 +48,8 @@
   },
   "success": {
     "welcome": "Xosh keldińiz,",
-    "honorific": "Hurmetli"
+    "honorific": "Hurmetli",
+    "supervisor": "Qadaǵalawshı"
   },
   "denied": {
     "title": "Bólmege",

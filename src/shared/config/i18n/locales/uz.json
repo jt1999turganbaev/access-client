@@ -33,8 +33,8 @@
   },
   "idle": {
     "station": "{{number}}-stansiya",
-    "roomTitle": "{{number}} raqamli xonaga kirish uchun",
-    "roomTitleWithName": "{{number}} raqamli «{{name}}» xonasiga kirish uchun",
+    "roomTitle": "{{number}}-sonli xonaga kirish uchun",
+    "roomTitleWithName": "{{number}}-sonli «{{name}}» xonasiga kirish uchun",
     "roomAccent": "identifikatsiyadan o‘ting",
     "title": "Kirish tizimi",
     "accent": "tayyor",
@@ -48,7 +48,8 @@
   },
   "success": {
     "welcome": "Xush kelibsiz,",
-    "honorific": "Hurmatli"
+    "honorific": "Hurmatli",
+    "supervisor": "Nazoratchi"
   },
   "denied": {
     "title": "Xonaga",

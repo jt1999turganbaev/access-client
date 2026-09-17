@@ -157,19 +157,19 @@
 
 /* O'qish qulay bo'lishi uchun: qator oralig'i keng, qator uzunligi cheklangan */
 .taskText {
-  font-size: var(--fs-base);
+  font-size: var(--fs-lg);
   font-weight: var(--fw-label);
-  line-height: 1.6;
+  line-height: 1.5;
   letter-spacing: 0.005em;
   color: #235a3c;
-  max-width: 38rem;
+  max-width: 48rem;
 }
 
 /* Matn uzun bo'lsa — biroz kichikroq, shunda scrollsiz sig'adi */
 .taskTextCompact {
-  font-size: var(--fs-sm);
-  line-height: 1.55;
-  max-width: 42rem;
+  font-size: var(--fs-md);
+  line-height: 1.5;
+  max-width: 52rem;
 }
 
 .empty {
