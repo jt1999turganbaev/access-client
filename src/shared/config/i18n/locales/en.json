@@ -88,8 +88,6 @@
     "noRooms": "No active rooms found on the server. Once an administrator adds a room, tap “Try again”.",
     "loadError": "Could not load the room list",
     "room": "Room",
-    "placeholder": "Select a room",
-    "titleLanguage": "Change language",
-    "textLanguage": "Select the tablet interface language and save."
+    "placeholder": "Select a room"
   }
 }

@@ -88,8 +88,6 @@
     "noRooms": "Serverda faol xona topilmadi. Administrator xona qo‘shgach, “Qayta urinish”ni bosing.",
     "loadError": "Xonalar ro‘yxatini olib bo‘lmadi",
     "room": "Xona",
-    "placeholder": "Xonani tanlang",
-    "titleLanguage": "Tilni o‘zgartirish",
-    "textLanguage": "Planshet interfeysi tilini tanlab, saqlang."
+    "placeholder": "Xonani tanlang"
   }
 }

@@ -5,13 +5,11 @@ import { useTablet } from '@/features/tablet/tablet-context/tablet-context';
 import classes from './settings-button.module.css';
 
 /**
- * Sozlash tugmasi — barcha ekranlarda pastki chap burchakda.
- * Bosh ekranda xona va til, qolgan ekranlarda faqat til o'zgartiriladi.
+ * Sozlash tugmasi — barcha ekranlarda pastki chap burchakda (xona va til).
  */
 export function SettingsButton() {
   const { t } = useTranslation();
-  const { openRoomSetup, room, state } = useTablet();
-  const mode = state === 'idle' ? 'full' : 'language';
+  const { openRoomSetup, room } = useTablet();
 
   return (
     // Portal: tugma layout'ning stacking context'idan chiqariladi — footer ustida qoladi
@@ -24,7 +22,7 @@ export function SettingsButton() {
           room ? `${t('common.settings')} · ${room.number} ${room.name}` : t('common.settings')
         }
         title={room ? `${room.number} ${room.name}` : t('common.settings')}
-        onClick={() => openRoomSetup(mode)}
+        onClick={openRoomSetup}
         styles={{
           root: {
             // Ekranning pastki chap burchagi (Mantine'ning position: relative'ini bosib o'tadi)

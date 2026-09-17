@@ -6,7 +6,6 @@ import {
   IconChevronDown,
   IconDeviceFloppy,
   IconDoorExit,
-  IconLanguage,
 } from '@tabler/icons-react';
 import { useTablet } from '@/features/tablet/tablet-context/tablet-context';
 import { LANGUAGES, type LanguageCode } from '@/shared/config/languages';
@@ -69,7 +68,6 @@ export function RoomSetupModal() {
   const { t, i18n } = useTranslation();
   const {
     roomSetupOpen,
-    settingsMode,
     needsRoomSetup,
     closeRoomSetup,
     saveRoom,
@@ -94,16 +92,15 @@ export function RoomSetupModal() {
     label: `${item.number} — ${item.name}`,
   }));
 
-  const languageOnly = settingsMode === 'language';
-
   const handleSave = () => {
     // Til faqat "Saqlash" bosilganda qo'llanadi
     const applyLanguage = () => {
       if (language !== i18n.resolvedLanguage) void i18n.changeLanguage(language as LanguageCode);
     };
 
-    // Natija ekranlarida: faqat til, joriy ekran o'z holicha qoladi
-    if (languageOnly) {
+    // Xona o'zgarmagan — faqat til: joriy ekran o'z holicha qoladi (bosh sahifaga qaytmaydi).
+    // Xonalar ro'yxati yuklanmagan bo'lsa ham til saqlanaveradi.
+    if (room && value === String(room.id)) {
       applyLanguage();
       closeRoomSetup();
       return;
@@ -131,66 +128,50 @@ export function RoomSetupModal() {
     >
       <div className={classes.body}>
         <div className={classes.iconWrap}>
-          {languageOnly ? (
-            <IconLanguage className={classes.icon} stroke={1.6} />
-          ) : (
-            <IconDoorExit className={classes.icon} stroke={1.6} />
-          )}
+          <IconDoorExit className={classes.icon} stroke={1.6} />
           <span className={classes.iconBadge}>!</span>
         </div>
 
         <div className={classes.title}>
-          {needsRoomSetup
-            ? t('roomSetup.titleRequired')
-            : languageOnly
-              ? t('roomSetup.titleLanguage')
-              : t('roomSetup.titleChange')}
+          {needsRoomSetup ? t('roomSetup.titleRequired') : t('roomSetup.titleChange')}
         </div>
         <div className={classes.text}>
-          {needsRoomSetup
-            ? t('roomSetup.textRequired')
-            : languageOnly
-              ? t('roomSetup.textLanguage')
-              : t('roomSetup.textChange')}
+          {needsRoomSetup ? t('roomSetup.textRequired') : t('roomSetup.textChange')}
         </div>
 
-        {!languageOnly && (
-          <>
-            {!roomsError && !roomsLoading && options.length === 0 && (
-              <Alert className={classes.alert} color="orange" icon={<IconAlertCircle />}>
-                {t('roomSetup.noRooms')}
-                <Button size="xs" variant="light" color="orange" mt="0.8rem" onClick={refetchRooms}>
-                  {t('common.retry')}
-                </Button>
-              </Alert>
-            )}
-
-            {roomsError && options.length === 0 && (
-              <Alert
-                className={classes.alert}
-                color="red"
-                icon={<IconAlertCircle />}
-                title={t('roomSetup.loadError')}
-              >
-                <Button size="xs" variant="light" color="red" onClick={refetchRooms}>
-                  {t('common.retry')}
-                </Button>
-              </Alert>
-            )}
-
-            <div className={classes.field}>
-              <Select
-                label={t('roomSetup.room')}
-                placeholder={roomsLoading ? t('common.loading') : t('roomSetup.placeholder')}
-                data={options}
-                value={value}
-                onChange={setValue}
-                disabled={roomsLoading}
-                {...selectProps(classes.chevron)}
-              />
-            </div>
-          </>
+        {!roomsError && !roomsLoading && options.length === 0 && (
+          <Alert className={classes.alert} color="orange" icon={<IconAlertCircle />}>
+            {t('roomSetup.noRooms')}
+            <Button size="xs" variant="light" color="orange" mt="0.8rem" onClick={refetchRooms}>
+              {t('common.retry')}
+            </Button>
+          </Alert>
         )}
+
+        {roomsError && options.length === 0 && (
+          <Alert
+            className={classes.alert}
+            color="red"
+            icon={<IconAlertCircle />}
+            title={t('roomSetup.loadError')}
+          >
+            <Button size="xs" variant="light" color="red" onClick={refetchRooms}>
+              {t('common.retry')}
+            </Button>
+          </Alert>
+        )}
+
+        <div className={classes.field}>
+          <Select
+            label={t('roomSetup.room')}
+            placeholder={roomsLoading ? t('common.loading') : t('roomSetup.placeholder')}
+            data={options}
+            value={value}
+            onChange={setValue}
+            disabled={roomsLoading}
+            {...selectProps(classes.chevron)}
+          />
+        </div>
 
         <div className={classes.field}>
           <Select
@@ -208,7 +189,7 @@ export function RoomSetupModal() {
           h="4.8rem"
           styles={{ root: { borderRadius: '1rem', fontSize: 'var(--fs-md)' } }}
           leftSection={<IconDeviceFloppy className={classes.submitIcon} />}
-          disabled={!languageOnly && !value}
+          disabled={!value}
           onClick={handleSave}
         >
           {t('common.save')}
