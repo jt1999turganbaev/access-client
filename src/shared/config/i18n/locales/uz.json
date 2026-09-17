@@ -67,8 +67,8 @@
     "text": "Kutilmagan xato sodir bo‘ldi. Iltimos, qayta urinib ko‘ring yoki tizim administratoriga murojaat qiling."
   },
   "task": {
-    "titleOne": "Sizning vazifangiz",
-    "titleMany": "Sizning vazifalaringiz",
+    "titleOne": "Sizning amaliy ko‘nikmangiz",
+    "titleMany": "Sizning amaliy ko‘nikmalaringiz",
     "count": "{{count}} ta",
     "empty": "Bugungi kun uchun vazifa biriktirilmagan."
   },
