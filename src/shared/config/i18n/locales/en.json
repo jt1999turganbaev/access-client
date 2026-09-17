@@ -32,6 +32,7 @@
     "language": "Language"
   },
   "idle": {
+    "station": "Station {{number}}",
     "roomTitle": "To enter room {{number}},",
     "roomTitleWithName": "To enter room {{number}} “{{name}}”,",
     "roomAccent": "please identify yourself",
@@ -46,7 +47,8 @@
     "subtitle": "Please wait"
   },
   "success": {
-    "welcome": "Welcome,"
+    "welcome": "Welcome,",
+    "honorific": "Dear"
   },
   "denied": {
     "title": "Access",

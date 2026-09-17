@@ -5,6 +5,8 @@ export interface Room {
   id: number;
   name: string;
   number: string;
+  /** Stansiya raqami — bosh sahifada xona sarlavhasi tepasida ko'rinadi */
+  number_station?: string | null;
 }
 
 export type TerminalDirection = 'in' | 'out';
@@ -15,7 +17,8 @@ export interface AccessDisplay {
   captured_at: string;
   direction: TerminalDirection | null;
   granted: boolean;
-  user: { id: number; full_name: string; photo: string | null } | null;
+  /** `is_top` — hurmatli mehmon: rasm ko'rsatilmaydi, "Hurmatli" deb murojaat qilinadi */
+  user: { id: number; full_name: string; photo: string | null; is_top?: boolean } | null;
   /** Terminal tanimagan bo'lsa ham ismi kelishi mumkin */
   reported_name: string | null;
   task: { id: number; name: string; description: string | null } | null;
@@ -39,6 +42,8 @@ export interface RecognizedUser {
   /** Backend hozircha bermaydi — bo'lmasa card'da ko'rsatilmaydi */
   position?: string | null;
   photoUrl?: string | null;
+  /** Hurmatli mehmon */
+  isTop: boolean;
   room: string;
   terminal: string;
   tasks: TaskItem[];

@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
+import { useTranslation } from 'react-i18next';
 import { deviceStorage, roomStorage, tabletApi } from '@/features/tablet/api/tablet-api';
 import type { AccessEvent, AccessStatus, Room, TabletState } from '@/features/tablet/types';
 import { PROCESSING_TIMEOUT, STREAM_RETRY_DELAY } from '@/shared/config/env';
@@ -39,14 +40,38 @@ export function TabletProvider({ children }: { children: ReactNode }) {
 
   const needsRoomSetup = !room;
 
-  // Xona tanlanmagan bo'lsa server tekshiriladi: javob kelmaguncha har STREAM_RETRY_DELAY da qayta so'raladi
+  // Xona nomi tanlangan tilda keladi — til o'zgarsa ro'yxat qayta so'raladi
+  const { i18n } = useTranslation();
+
+  // Xona tanlanmagan bo'lsa server tekshiriladi: javob kelmaguncha har STREAM_RETRY_DELAY da qayta so'raladi.
+  // Tanlangan bo'lsa ham bir marta so'raladi — saqlangan xona ma'lumoti yangilanishi uchun.
   const roomsQuery = useQuery({
-    queryKey: [QUERY_KEYS.ROOMS],
+    queryKey: [QUERY_KEYS.ROOMS, i18n.resolvedLanguage],
     queryFn: tabletApi.getRooms,
-    enabled: needsRoomSetup || roomSetupOpen,
     retry: needsRoomSetup ? true : 1,
     retryDelay: STREAM_RETRY_DELAY,
+    // Til almashganda yangi ro'yxat kelguncha eskisi turadi — oyna yopilib-ochilib ketmaydi
+    placeholderData: (previous) => previous,
   });
+
+  // Saqlangan xona eski bo'lishi mumkin (boshqa tildagi nom, `number_station` yo'q) — serverdagisi bilan yangilanadi
+  const freshRoom = room ? roomsQuery.data?.find((item) => item.id === room.id) : undefined;
+  useEffect(() => {
+    if (!freshRoom) return;
+    setRoom((current) => {
+      if (
+        !current ||
+        current.id !== freshRoom.id ||
+        (current.name === freshRoom.name &&
+          current.number === freshRoom.number &&
+          current.number_station === freshRoom.number_station)
+      ) {
+        return current;
+      }
+      roomStorage.set(freshRoom);
+      return freshRoom;
+    });
+  }, [freshRoom]);
 
   const roomsLoaded = roomsQuery.data !== undefined;
   const connected = needsRoomSetup ? roomsQuery.status === 'success' : streamConnected;

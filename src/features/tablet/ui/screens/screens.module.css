@@ -10,9 +10,26 @@
   padding-bottom: 2rem;
 }
 
+/* DEFAULT: kontent markazdan biroz yuqoriroq turadi */
+.idle {
+  gap: 2.6rem;
+  padding-bottom: 8rem;
+}
+
 /* DEFAULT: xona tanlangan bo'lsa sarlavha uzun — kichikroq shrift */
 .roomHeading h1 {
-  font-size: 2.6rem;
+  font-size: 2.9rem;
+}
+
+/* Stansiya raqami — xona sarlavhasining tepasida, undan biroz kattaroq */
+.station {
+  margin-bottom: 1.8rem;
+  text-align: center;
+  font-size: 3.5rem;
+  font-weight: var(--fw-display);
+  line-height: 1.15;
+  color: var(--ac-navy);
+  animation: fade 420ms ease both;
 }
 
 /* SUCCESS / DENIED / NOT FOUND: yuqoridan pastga */
@@ -24,6 +41,12 @@
   align-items: stretch;
   gap: 1.5rem;
   padding-top: 1rem;
+}
+
+/* SUCCESS (hurmatli mehmon, vazifasiz): faqat salomlashuv — markazda */
+.resultCentered {
+  justify-content: center;
+  padding-bottom: 6rem;
 }
 
 /* SUCCESS: "Xush kelibsiz" va FIO alohida qatorlarda, FIO kattaroq */
@@ -44,9 +67,14 @@
   color: #6b83b0;
 }
 
+/* Hurmatli mehmon: avatar yo'q — stansiya va salomlashuv tepaga yopishmasin */
+.welcomeTop {
+  margin-top: 4rem;
+}
+
 .welcomeName {
   margin: 0.4rem 0 0;
-  font-size: 4rem;
+  font-size: 3rem;
   font-weight: var(--fw-display);
   line-height: 1.15;
   color: var(--ac-navy);
@@ -78,7 +106,7 @@
   border-radius: 999px;
   background: rgba(235, 250, 241, 0.94);
   border: 1px solid #cfeedd;
-  font-size: var(--fs-md);
+  font-size: 1.9rem;
   font-weight: var(--fw-value);
   color: #3f8a60;
   margin-top: -1rem;

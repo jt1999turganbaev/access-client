@@ -32,6 +32,7 @@
     "language": "Til"
   },
   "idle": {
+    "station": "{{number}}-stansiya",
     "roomTitle": "{{number}} raqamli xonaga kirish uchun",
     "roomTitleWithName": "{{number}} raqamli «{{name}}» xonasiga kirish uchun",
     "roomAccent": "identifikatsiyadan o‘ting",
@@ -46,7 +47,8 @@
     "subtitle": "Iltimos, kuting"
   },
   "success": {
-    "welcome": "Xush kelibsiz,"
+    "welcome": "Xush kelibsiz,",
+    "honorific": "Hurmatli"
   },
   "denied": {
     "title": "Xonaga",

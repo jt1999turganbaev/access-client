@@ -9,23 +9,35 @@ import classes from './screens.module.css';
 
 export function SuccessScreen() {
   const { t } = useTranslation();
-  const { event } = useTablet();
+  const { event, room } = useTablet();
   const user = event?.user;
+  const station = room?.number_station?.trim();
 
   if (!user || event?.status !== 'granted') return <Navigate to={ROUTES.IDLE} replace />;
 
-  return (
-    <div className={classes.result}>
-      <div className={classes.avatarRow}>
-        <StatusAvatar status="success" photoUrl={user.photoUrl} size={11} />
-      </div>
+  // Hurmatli mehmon: rasm yo'q, "Hurmatli" deb murojaat, vazifa kartasi faqat vazifa bo'lsa
+  const { isTop } = user;
+  // TaskCard ham faqat matni bor vazifalarni ko'rsatadi
+  const hasTasks = (user.tasks ?? []).some((task) => task?.description);
 
-      <div className={classes.welcome}>
-        <div className={classes.welcomeText}>{t('success.welcome')}</div>
+  return (
+    <div className={`${classes.result} ${isTop && !hasTasks ? classes.resultCentered : ''}`}>
+      {!isTop && (
+        <div className={classes.avatarRow}>
+          <StatusAvatar status="success" photoUrl={user.photoUrl} size={11} />
+        </div>
+      )}
+
+      <div className={`${classes.welcome} ${isTop ? classes.welcomeTop : ''}`}>
+        {station && <div className={classes.station}>{t('idle.station', { number: station })}</div>}
+        <div className={classes.welcomeText}>
+          {t('success.welcome')}
+          {isTop && ` ${t('success.honorific')}`}
+        </div>
         <h1 className={classes.welcomeName}>{user.fullName}!</h1>
       </div>
 
-      <TaskCard tasks={user.tasks} />
+      {(!isTop || hasTasks) && <TaskCard tasks={user.tasks} />}
       <ResultCountdown />
     </div>
   );

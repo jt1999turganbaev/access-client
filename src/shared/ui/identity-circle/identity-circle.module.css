@@ -58,8 +58,8 @@
   position: relative;
   display: block;
   shape-rendering: geometricPrecision;
-  width: calc(var(--circle-size) * 0.38);
-  height: calc(var(--circle-size) * 0.38);
+  width: var(--icon-size, calc(var(--circle-size) * 0.38));
+  height: var(--icon-size, calc(var(--circle-size) * 0.38));
   color: var(--ac-blue-soft);
   animation: breathe 2.4s ease-in-out infinite;
 }

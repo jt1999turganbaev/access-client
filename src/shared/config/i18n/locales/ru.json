@@ -32,6 +32,7 @@
     "language": "Язык"
   },
   "idle": {
+    "station": "Станция {{number}}",
     "roomTitle": "Для входа в помещение № {{number}}",
     "roomTitleWithName": "Для входа в помещение № {{number}} «{{name}}»",
     "roomAccent": "пройдите идентификацию",
@@ -46,7 +47,8 @@
     "subtitle": "Пожалуйста, подождите"
   },
   "success": {
-    "welcome": "Добро пожаловать,"
+    "welcome": "Добро пожаловать,",
+    "honorific": "Уважаемый(-ая)"
   },
   "denied": {
     "title": "Доступ в помещение",

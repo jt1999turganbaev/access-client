@@ -72,6 +72,7 @@ export function toAccessEvent(display: AccessDisplay, room: Room | null): Access
           // Ism kelmasa terminal aytgan nomga, u ham bo'lmasa chiziqchaga tushamiz
           fullName: text(user.full_name) ?? text(display.reported_name) ?? '—',
           photoUrl: resolveMediaUrl(user.photo),
+          isTop: user.is_top === true,
           position: null,
           room: room ? roomLabel(room) : '—',
           terminal: directionLabel(display.direction),

@@ -32,6 +32,7 @@
     "language": "Til"
   },
   "idle": {
+    "station": "{{number}}-stanciya",
     "roomTitle": "{{number}}-sanlı bólmege kiriw ushın",
     "roomTitleWithName": "{{number}}-sanlı «{{name}}» bólmesine kiriw ushın",
     "roomAccent": "identifikaciyadan ótiń",
@@ -46,7 +47,8 @@
     "subtitle": "Iltimas, kútiń"
   },
   "success": {
-    "welcome": "Xosh keldińiz,"
+    "welcome": "Xosh keldińiz,",
+    "honorific": "Hurmetli"
   },
   "denied": {
     "title": "Bólmege",

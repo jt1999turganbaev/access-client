@@ -8,12 +8,17 @@ export function IdleScreen() {
   const { room, connected } = useTablet();
 
   return (
-    <div className={classes.center}>
-      <IdentityCircle size={28} />
+    <div className={`${classes.center} ${classes.idle}`}>
+      <IdentityCircle size={20} iconSize={8.5} />
 
       {room?.number ? (
         // Xona tanlangan bo'lsa, sarlavhada o'sha xona raqami va nomi ko'rinadi
         <div className={classes.roomHeading}>
+          {room.number_station?.trim() && (
+            <div className={classes.station}>
+              {t('idle.station', { number: room.number_station.trim() })}
+            </div>
+          )}
           <StatusHeading
             title={
               room.name?.trim()
